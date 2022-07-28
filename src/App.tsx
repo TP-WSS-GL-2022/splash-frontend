@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { FC } from "react";
+import { Route, Routes } from "react-router-dom";
+import { MainLayout } from "./components";
+import { Home, Test } from "./pages";
 
-
-function App() {
-	return <h1>Hello World!</h1>;
-}
+const App = () => {
+    return (
+        <Routes>
+            <Route path="/" element={<MainLayout />}>
+                <Route index element={<Home />} />
+                <Route path="test" element={<Test />} />
+            </Route>
+        </Routes>
+    );
+};
 
 export default App;
