@@ -1,4 +1,6 @@
-const Following: React.FC = () => {
+import { FC } from "react";
+
+const Following: FC = () => {
     return (
         <div>
             <h1>Following</h1>

@@ -1,4 +1,6 @@
-const Explore: React.FC = () => {
+import { FC } from "react";
+
+const Explore: FC = () => {
     return (
         <div>
             <h1>Explore</h1>
