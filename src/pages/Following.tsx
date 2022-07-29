@@ -1,9 +1,24 @@
 import { FC } from "react";
+import { Heading, Text,SimpleGrid} from "@chakra-ui/react";
+import StreamCard from "../components/features/streamCard";
 
 const Following: FC = () => {
     return (
         <div>
-            <h1>Following</h1>
+            <Heading fontSize="4xl" color="white">
+                FOLLOWING
+            </Heading>
+            {/* <Divider orientation='horizontal' /> */}
+            <Text fontSize="2xl" color="white">
+                Live channels
+            </Text>
+            <SimpleGrid minChildWidth='240px' spacing='40px'>
+                <StreamCard/>
+                <StreamCard/>
+                <StreamCard/>
+                <StreamCard/>
+                <StreamCard/>
+            </SimpleGrid>
         </div>
     );
 };
