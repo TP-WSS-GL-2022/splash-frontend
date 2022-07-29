@@ -5,7 +5,6 @@ import { Box, HStack, Input } from "@chakra-ui/react";
 
 import * as Chat from "../components/layouts/ChatSidebar";
 
-
 const Test: FC<PropsWithChildren<{}>> = props => {
     const [name, setName] = useState("");
 

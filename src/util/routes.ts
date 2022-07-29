@@ -1,8 +1,7 @@
 export enum AppRoute {
     Landing = "/",
-    Home = "/",
+    Home = "/home",
     Test = "/test",
     Explore = "/explore",
     Following = "/following",
-    NotFound = "/404",
 }

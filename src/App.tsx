@@ -5,16 +5,17 @@ import { MainLayout } from "./components";
 import { Explore, Following, Home, Test } from "./pages";
 import { AppRoute } from "./util/routes";
 
-
-const App = () => {
+const App: FC = () => {
     return (
         <Routes>
-            <Route path={AppRoute.Home} element={<MainLayout />}>
-                <Route index element={<Home />} />
+            <Route element={<MainLayout />}>
+                <Route path={AppRoute.Home} element={<Home />} />
                 <Route path={AppRoute.Test} element={<Test />} />
                 <Route path={AppRoute.Explore} element={<Explore />} />
                 <Route path={AppRoute.Following} element={<Following />} />
             </Route>
+            <Route path={AppRoute.Landing} element={<div>landing</div>} />
+            <Route path="*" element={<div>404</div>} />
         </Routes>
     );
 };

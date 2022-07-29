@@ -5,173 +5,186 @@ import {
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import {
-    Avatar, Box, BoxProps, Button, CloseButton, Drawer, DrawerContent, Flex, FlexProps, HStack,
-    Icon, IconButton, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, Tooltip,
-    useColorModeValue, useDisclosure
+    Avatar, Box, BoxProps, Button, Drawer, DrawerContent, Flex, FlexProps, HStack, Icon, IconButton,
+    Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, Tooltip, useDisclosure, VStack
 } from "@chakra-ui/react";
 
 import { AppRoute } from "../../util/routes";
 
-
+// TODO: Replace with a hook to see the auth state
 const isLoggedIn = false;
 
 interface LinkItemProps {
     name: string;
     icon: IconType;
-    link: AppRoute;
-    tooltip: string;
+    link: string;
 }
 
 const LinkItems: LinkItemProps[] = [
-    { name: "Home", icon: FiHome, link: AppRoute.Home, tooltip: "Home" },
+    { name: "Home", icon: FiHome, link: AppRoute.Home },
     {
         name: "Explore",
         icon: FiCompass,
         link: AppRoute.Explore,
-        tooltip: "Explore",
     },
     {
         name: "Following",
         icon: FiStar,
         link: AppRoute.Following,
-        tooltip: "Following",
     },
-    { name: "Test", icon: FiSettings, link: AppRoute.Test, tooltip: "Test" },
+    { name: "Test", icon: FiSettings, link: AppRoute.Test },
 ];
 
 interface SidebarProps extends BoxProps {
-    onClose: () => void;
-    onOpen: () => void;
+    onToggle: () => void;
     isOpen: boolean;
 }
 
-const SidebarContent = ({ onClose, onOpen, isOpen, ...rest }: SidebarProps) => {
+const SidebarContent = ({ onToggle, isOpen, ...rest }: SidebarProps) => {
     return (
         <Box
+            alignSelf="stretch"
             borderRight="1px"
             borderRightColor="gray.700"
-            w={{ base: "full", md: isOpen ? "15rem" : "5rem" }}
-            pos="fixed"
-            h="full"
+            transition="0.4s ease-in-out"
             {...rest}
         >
-            <Flex
-                h="20"
-                alignItems="center"
-                mx={4}
-                justifyContent="space-between"
-                position="relative"
-            >
-                <Text
-                    fontSize="2xl"
-                    fontFamily="monospace"
-                    fontWeight="bold"
-                    opacity={isOpen ? "1" : "0"}
-                    transition="0.2s ease-in"
-                    position="absolute"
+            <Box pos="sticky" top={0} mx={4}>
+                <Flex
+                    h="20"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    position="relative"
                 >
-                    Logo
-                </Text>
-                <Box mb={2} ml="auto">
-                    <Button
-                        bg="whiteAlpha.200"
-                        color="white"
-                        size="xl"
-                        justifyContent="start"
-                        p="4"
-                        borderRadius="lg"
-                        cursor="pointer"
-                        _hover={{ bg: "teal.200", color: "black" }}
-                        onClick={isOpen ? onClose : onOpen}
-                        aria-label="open menu"
+                    {/* TODO: Change to a Logo SVG or PNG and */}
+                    <Text
+                        fontSize="2xl"
+                        fontWeight="bold"
+                        opacity={isOpen ? "1" : "0"}
+                        transition="0.2s ease-in"
+                        position="absolute"
                     >
-                        <Icon
-                            fontSize="16"
-                            as={FiChevronsLeft}
-                            transform={`rotate(${isOpen ? "0deg" : "180deg"})`}
-                            transition="opacity 0.2s ease-in, transform 0.2s ease-in"
-                        />
-                    </Button>
-                </Box>
-            </Flex>
+                        Splash
+                    </Text>
 
-            {LinkItems.map((link, index) => (
-                <NavItem key={index} link={link.link} icon={link.icon}>
-                    <Tooltip
-                        hasArrow
-                        label={link.tooltip}
-                        openDelay={300}
-                        placement="right"
-                        isDisabled={isOpen}
-                    >
-                        <Text
-                            opacity={isOpen ? "1" : "0"}
-                            transition="opacity 0.2s ease-in"
-                        >
-                            {link.name}
-                        </Text>
-                    </Tooltip>
-                </NavItem>
-            ))}
+                    <IconButton
+                        icon={
+                            <Icon
+                                as={FiChevronsLeft}
+                                transform={`rotate(${
+                                    isOpen ? "0deg" : "180deg"
+                                })`}
+                                transition="opacity 0.2s ease-in, transform 0.2s ease-in"
+                            />
+                        }
+                        aria-label="open menu"
+                        p="4"
+                        ml="auto"
+                        size="xl"
+                        color="white"
+                        bg="whiteAlpha.200"
+                        borderRadius="lg"
+                        _hover={{ bg: "teal.200", color: "black" }}
+                        onClick={onToggle}
+                    />
+                </Flex>
+
+                <VStack mt={4} spacing={2}>
+                    {LinkItems.map((link, index) => (
+                        <NavItem key={index} link={link} isOpen={isOpen}>
+                            <Text
+                                fontSize="md"
+                                opacity={isOpen ? "1" : "0"}
+                                transition="opacity 0.2s ease-in"
+                            >
+                                {link.name}
+                            </Text>
+                        </NavItem>
+                    ))}
+                </VStack>
+            </Box>
         </Box>
     );
 };
 
 interface NavItemProps extends FlexProps {
-    icon: IconType;
-    link: string;
+    link: LinkItemProps;
+    isOpen: boolean;
 }
 
-const NavItem = ({ icon, link, children, ...rest }: NavItemProps) => {
+const NavItem = ({ link, isOpen, children }: NavItemProps) => {
     const location = useLocation();
     const navigate = useNavigate();
     return (
-        <Box mb={2} mx={4}>
+        <Tooltip
+            label={link.name}
+            openDelay={300}
+            offset={[0, 12]}
+            placement="right"
+            isDisabled={isOpen}
+            hasArrow
+        >
             <Button
-                bg={location.pathname === link ? "teal.200" : "whiteAlpha.200"}
-                color={location.pathname === link ? "black" : "white"}
                 size="xl"
                 w="100%"
-                justifyContent="start"
                 p="4"
                 borderRadius="lg"
+                justifyContent="start"
                 cursor="pointer"
+                bg={
+                    location.pathname === link.link
+                        ? "teal.200"
+                        : "whiteAlpha.200"
+                }
+                color={location.pathname === link.link ? "black" : "white"}
                 _hover={{ bg: "teal.200", color: "black" }}
-                onClick={() => navigate(link)}
+                onClick={() => navigate(link.link)}
                 overflowWrap="break-word"
                 overflow="hidden"
             >
-                {icon && <Icon mr="4" fontSize="16" as={icon} />}
+                <Icon mr="4" fontSize="16" as={link.icon} />
                 {children}
             </Button>
-        </Box>
+        </Tooltip>
     );
 };
 
 interface MobileProps extends FlexProps {
-    onOpen: () => void;
+    onToggle: () => void;
     isOpen: boolean;
 }
-const NavHeader = ({ onOpen, isOpen, ...rest }: MobileProps) => {
+const NavHeader = ({ onToggle, isOpen }: MobileProps) => {
     return (
         <Flex
-            ml={{ base: 0, md: isOpen ? "15rem" : "5rem" }}
+            h="20"
             px={{ base: 4, md: 4 }}
-            height="20"
+            alignSelf="stretch"
             alignItems="center"
-            bg={"gray.900"}
             borderBottomWidth="1px"
-            borderBottomColor={"gray.700"}
+            borderBottomColor="gray.700"
+            bg="gray.900"
             justifyContent={{ base: "space-between", md: "flex-end" }}
-            {...rest}
         >
             <IconButton
                 display={{ base: "flex", md: "none" }}
-                onClick={onOpen}
+                onClick={onToggle}
                 variant="outline"
                 aria-label="open menu"
                 icon={<FiMenu />}
             />
+
+            <Drawer
+                autoFocus={false}
+                isOpen={isOpen}
+                placement="left"
+                onClose={onToggle}
+                returnFocusOnClose={false}
+                onOverlayClick={onToggle}
+            >
+                <DrawerContent>
+                    <SidebarContent isOpen={isOpen} onToggle={onToggle} />
+                </DrawerContent>
+            </Drawer>
 
             <Text
                 display={{ base: "flex", md: "none" }}
@@ -183,26 +196,7 @@ const NavHeader = ({ onOpen, isOpen, ...rest }: MobileProps) => {
             </Text>
 
             <HStack spacing={6}>
-                {isLoggedIn && (
-                    <>
-                        <Button
-                            fontSize={"sm"}
-                            fontWeight={400}
-                            variant={"ghost"}
-                        >
-                            Sign In
-                        </Button>
-                        <Button
-                            display={{ base: "none", md: "inline-flex" }}
-                            fontSize={"sm"}
-                            fontWeight={600}
-                            colorScheme={"teal"}
-                        >
-                            Sign Up
-                        </Button>
-                    </>
-                )}
-                {!isLoggedIn && (
+                {isLoggedIn ? (
                     <>
                         <Button
                             variant={"solid"}
@@ -237,6 +231,19 @@ const NavHeader = ({ onOpen, isOpen, ...rest }: MobileProps) => {
                             </MenuList>
                         </Menu>
                     </>
+                ) : (
+                    <>
+                        <Button fontWeight={400} variant={"ghost"}>
+                            Sign In
+                        </Button>
+                        <Button
+                            display={{ base: "none", md: "inline-flex" }}
+                            fontWeight={600}
+                            colorScheme={"teal"}
+                        >
+                            Sign Up
+                        </Button>
+                    </>
                 )}
             </HStack>
         </Flex>
@@ -244,31 +251,25 @@ const NavHeader = ({ onOpen, isOpen, ...rest }: MobileProps) => {
 };
 
 const SidebarWithHeader = () => {
-    const location = useLocation();
-
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen, onToggle } = useDisclosure();
+    const { isOpen: isOpenMobile, onToggle: onToggleMobile } = useDisclosure();
     return (
-        <Box minH="100vh" bg="gray.900">
+        <HStack minH="100vh" bg="gray.900" align="stretch" gap="0">
             <SidebarContent
                 isOpen={isOpen}
-                onClose={onClose}
-                onOpen={onOpen}
+                onToggle={onToggle}
                 display={{ base: "none", md: "block" }}
-                transition="0.4s ease-in-out"
+                w={{ base: "full", md: isOpen ? "15rem" : "5rem" }}
             />
 
-            <NavHeader
-                isOpen={isOpen}
-                onOpen={onOpen}
-                transition="0.4s ease-in-out"
-            />
-            <Box
-                ml={{ base: 0, md: isOpen ? "15rem" : "5rem" }}
-                transition="0.4s ease-in-out"
-            >
-                <Outlet />
-            </Box>
-        </Box>
+            <VStack flex="1" m="0 !important">
+                <NavHeader isOpen={isOpenMobile} onToggle={onToggleMobile} />
+
+                <Box flex="1" m="0 !important" alignSelf="stretch">
+                    <Outlet />
+                </Box>
+            </VStack>
+        </HStack>
     );
 };
 
