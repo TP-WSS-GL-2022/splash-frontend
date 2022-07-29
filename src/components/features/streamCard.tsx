@@ -12,10 +12,10 @@ import Video from "./video.jpg";
 
 const StreamCard = () => {
     return (
-        <Box maxW="sm" borderRadius="lg" overflow="hidden">
+        <Box>
             <AspectRatio ratio={16 / 10}>
                 {/* Use Video Thumbnail */}
-                <Image src={Video} alt="Video Thumbnail here" />
+                <Image src={Video} w="100%" alt="Video Thumbnail here" />
             </AspectRatio>
             <Box display="flex" alignItems="topline" mt={2}>
                 {/* Streamer Avatar */}

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Heading, Text, Divider, Wrap, WrapItem } from "@chakra-ui/react";
+import { Heading, Text,SimpleGrid} from "@chakra-ui/react";
 import StreamCard from "../components/features/streamCard";
 
 const Following: FC = () => {
@@ -12,23 +12,13 @@ const Following: FC = () => {
             <Text fontSize="2xl" color="white">
                 Live channels
             </Text>
-            <Wrap>
-                <WrapItem w={500}>
-                    <StreamCard />
-                </WrapItem>
-                <WrapItem w={500}>
-                    <StreamCard />
-                </WrapItem>
-                <WrapItem w={500}>
-                    <StreamCard />
-                </WrapItem>
-                <WrapItem w={500}>
-                    <StreamCard />
-                </WrapItem>
-                <WrapItem w={500}>
-                    <StreamCard />
-                </WrapItem>
-            </Wrap>
+            <SimpleGrid minChildWidth='240px' spacing='40px'>
+                <StreamCard/>
+                <StreamCard/>
+                <StreamCard/>
+                <StreamCard/>
+                <StreamCard/>
+            </SimpleGrid>
         </div>
     );
 };
