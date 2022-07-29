@@ -17,7 +17,7 @@ const isLoggedIn = false;
 interface LinkItemProps {
     name: string;
     icon: IconType;
-    link: string;
+    link: AppRoute;
 }
 
 const LinkItems: LinkItemProps[] = [
