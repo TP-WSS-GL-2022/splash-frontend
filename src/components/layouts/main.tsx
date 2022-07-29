@@ -9,7 +9,6 @@ import {
     FiVideo,
 } from "react-icons/fi";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-
 import {
     Avatar,
     Box,
@@ -69,60 +68,63 @@ const SidebarContent = ({ onToggle, isOpen, ...rest }: SidebarProps) => {
             alignSelf="stretch"
             borderRight="1px"
             borderRightColor="gray.700"
-            justifySelf="stretch"
             transition="0.4s ease-in-out"
             {...rest}
         >
-            <Flex
-                h="20"
-                alignItems="center"
-                mx={4}
-                my={2}
-                justifyContent="space-between"
-                position="relative"
-            >
-                {/* TODO: Change to a Logo SVG or PNG and */}
-                <Text
-                    fontSize="2xl"
-                    fontWeight="bold"
-                    opacity={isOpen ? "1" : "0"}
-                    transition="0.2s ease-in"
-                    position="absolute"
+            <Box pos="sticky" top={0} mx={4}>
+                <Flex
+                    h="20"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    position="relative"
                 >
-                    Splash
-                </Text>
-
-                <IconButton
-                    icon={
-                        <Icon
-                            as={FiChevronsLeft}
-                            transform={`rotate(${isOpen ? "0deg" : "180deg"})`}
-                            transition="opacity 0.2s ease-in, transform 0.2s ease-in"
-                        />
-                    }
-                    aria-label="open menu"
-                    p="4"
-                    ml="auto"
-                    size="xl"
-                    color="white"
-                    bg="whiteAlpha.200"
-                    borderRadius="lg"
-                    _hover={{ bg: "teal.200", color: "black" }}
-                    onClick={onToggle}
-                />
-            </Flex>
-
-            {LinkItems.map((link, index) => (
-                <NavItem key={index} link={link} isOpen={isOpen}>
+                    {/* TODO: Change to a Logo SVG or PNG and */}
                     <Text
-                        fontSize="md"
+                        fontSize="2xl"
+                        fontWeight="bold"
                         opacity={isOpen ? "1" : "0"}
-                        transition="opacity 0.2s ease-in"
+                        transition="0.2s ease-in"
+                        position="absolute"
                     >
-                        {link.name}
+                        Splash
                     </Text>
-                </NavItem>
-            ))}
+
+                    <IconButton
+                        icon={
+                            <Icon
+                                as={FiChevronsLeft}
+                                transform={`rotate(${
+                                    isOpen ? "0deg" : "180deg"
+                                })`}
+                                transition="opacity 0.2s ease-in, transform 0.2s ease-in"
+                            />
+                        }
+                        aria-label="open menu"
+                        p="4"
+                        ml="auto"
+                        size="xl"
+                        color="white"
+                        bg="whiteAlpha.200"
+                        borderRadius="lg"
+                        _hover={{ bg: "teal.200", color: "black" }}
+                        onClick={onToggle}
+                    />
+                </Flex>
+
+                <VStack mt={4} spacing={2}>
+                    {LinkItems.map((link, index) => (
+                        <NavItem key={index} link={link} isOpen={isOpen}>
+                            <Text
+                                fontSize="md"
+                                opacity={isOpen ? "1" : "0"}
+                                transition="opacity 0.2s ease-in"
+                            >
+                                {link.name}
+                            </Text>
+                        </NavItem>
+                    ))}
+                </VStack>
+            </Box>
         </Box>
     );
 };
@@ -136,38 +138,36 @@ const NavItem = ({ link, isOpen, children }: NavItemProps) => {
     const location = useLocation();
     const navigate = useNavigate();
     return (
-        <Box mb={2} mx={4}>
-            <Tooltip
-                label={link.name}
-                openDelay={300}
-                offset={[0, 12]}
-                placement="right"
-                isDisabled={isOpen}
-                hasArrow
+        <Tooltip
+            label={link.name}
+            openDelay={300}
+            offset={[0, 12]}
+            placement="right"
+            isDisabled={isOpen}
+            hasArrow
+        >
+            <Button
+                size="xl"
+                w="100%"
+                p="4"
+                borderRadius="lg"
+                justifyContent="start"
+                cursor="pointer"
+                bg={
+                    location.pathname === link.link
+                        ? "teal.200"
+                        : "whiteAlpha.200"
+                }
+                color={location.pathname === link.link ? "black" : "white"}
+                _hover={{ bg: "teal.200", color: "black" }}
+                onClick={() => navigate(link.link)}
+                overflowWrap="break-word"
+                overflow="hidden"
             >
-                <Button
-                    size="xl"
-                    w="100%"
-                    p="4"
-                    borderRadius="lg"
-                    justifyContent="start"
-                    cursor="pointer"
-                    bg={
-                        location.pathname === link.link
-                            ? "teal.200"
-                            : "whiteAlpha.200"
-                    }
-                    color={location.pathname === link.link ? "black" : "white"}
-                    _hover={{ bg: "teal.200", color: "black" }}
-                    onClick={() => navigate(link.link)}
-                    overflowWrap="break-word"
-                    overflow="hidden"
-                >
-                    <Icon mr="4" fontSize="16" as={link.icon} />
-                    {children}
-                </Button>
-            </Tooltip>
-        </Box>
+                <Icon mr="4" fontSize="16" as={link.icon} />
+                {children}
+            </Button>
+        </Tooltip>
     );
 };
 
@@ -255,16 +255,11 @@ const NavHeader = ({ onToggle, isOpen }: MobileProps) => {
                     </>
                 ) : (
                     <>
-                        <Button
-                            fontSize={"sm"}
-                            fontWeight={400}
-                            variant={"ghost"}
-                        >
+                        <Button fontWeight={400} variant={"ghost"}>
                             Sign In
                         </Button>
                         <Button
                             display={{ base: "none", md: "inline-flex" }}
-                            fontSize={"sm"}
                             fontWeight={600}
                             colorScheme={"teal"}
                         >
