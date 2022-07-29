@@ -3,15 +3,17 @@ import { Route, Routes } from "react-router-dom";
 
 import { MainLayout } from "./components";
 import { Explore, Following, Home, Test } from "./pages";
+import { AppRoute } from "./util/routes";
+
 
 const App = () => {
     return (
         <Routes>
-            <Route path="/" element={<MainLayout />}>
+            <Route path={AppRoute.Home} element={<MainLayout />}>
                 <Route index element={<Home />} />
-                <Route path="test" element={<Test />} />
-                <Route path="explore" element={<Explore />} />
-                <Route path="following" element={<Following />} />
+                <Route path={AppRoute.Test} element={<Test />} />
+                <Route path={AppRoute.Explore} element={<Explore />} />
+                <Route path={AppRoute.Following} element={<Following />} />
             </Route>
         </Routes>
     );
