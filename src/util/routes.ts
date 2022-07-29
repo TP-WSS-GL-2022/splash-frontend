@@ -1,4 +1,5 @@
 export enum AppRoute {
+    Landing = "/",
     Home = "/",
     Test = "/test",
     Explore = "/explore",

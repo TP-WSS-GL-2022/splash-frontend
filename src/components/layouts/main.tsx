@@ -24,7 +24,12 @@ interface LinkItemProps {
 
 const LinkItems: LinkItemProps[] = [
     { name: "Home", icon: FiHome, link: AppRoute.Home, tooltip: "Home" },
-    { name: "Explore", icon: FiCompass, link: AppRoute.Explore, tooltip: "Explore" },
+    {
+        name: "Explore",
+        icon: FiCompass,
+        link: AppRoute.Explore,
+        tooltip: "Explore",
+    },
     {
         name: "Following",
         icon: FiStar,
@@ -259,7 +264,6 @@ const SidebarWithHeader = () => {
             />
             <Box
                 ml={{ base: 0, md: isOpen ? "15rem" : "5rem" }}
-                p="4"
                 transition="0.4s ease-in-out"
             >
                 <Outlet />
