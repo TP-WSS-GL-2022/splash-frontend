@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
+
 import { MainLayout } from "./components";
-import { Home, Test } from "./pages";
+import { Explore, Following, Home, Test } from "./pages";
 
 const App = () => {
     return (
@@ -9,6 +10,8 @@ const App = () => {
             <Route path="/" element={<MainLayout />}>
                 <Route index element={<Home />} />
                 <Route path="test" element={<Test />} />
+                <Route path="explore" element={<Explore />} />
+                <Route path="following" element={<Following />} />
             </Route>
         </Routes>
     );

@@ -1,37 +1,38 @@
+import { IconType } from "react-icons";
 import {
-    IconButton,
+    FiChevronsLeft,
+    FiCompass,
+    FiHome,
+    FiMenu,
+    FiSettings,
+    FiStar,
+    FiVideo,
+} from "react-icons/fi";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+
+import {
+    Avatar,
     Box,
+    BoxProps,
+    Button,
     CloseButton,
-    Flex,
-    HStack,
-    Icon,
-    useColorModeValue,
     Drawer,
     DrawerContent,
-    Text,
-    useDisclosure,
-    BoxProps,
+    Flex,
     FlexProps,
-    Button,
-    Avatar,
+    HStack,
+    Icon,
+    IconButton,
     Menu,
     MenuButton,
     MenuDivider,
     MenuItem,
     MenuList,
+    Text,
+    Tooltip,
+    useColorModeValue,
+    useDisclosure,
 } from "@chakra-ui/react";
-
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import {
-    FiHome,
-    FiCompass,
-    FiStar,
-    FiSettings,
-    FiMenu,
-    FiVideo,
-    FiChevronsLeft,
-} from "react-icons/fi";
-import { IconType } from "react-icons";
 
 const isLoggedIn = false;
 
@@ -39,20 +40,23 @@ interface LinkItemProps {
     name: string;
     icon: IconType;
     link: string;
+    tooltip: string;
 }
+
 const LinkItems: Array<LinkItemProps> = [
-    { name: "Home", icon: FiHome, link: "/" },
-    { name: "Explore", icon: FiCompass, link: "/explore" },
-    { name: "Following", icon: FiStar, link: "/following" },
-    { name: "Test", icon: FiSettings, link: "/test" },
+    { name: "Home", icon: FiHome, link: "/", tooltip: "Home" },
+    { name: "Explore", icon: FiCompass, link: "/explore", tooltip: "Explore" },
+    { name: "Following", icon: FiStar, link: "/following", tooltip: "Following" },
+    { name: "Test", icon: FiSettings, link: "/test", tooltip: "Test" },
 ];
 
 interface SidebarProps extends BoxProps {
     onClose: () => void;
+    onOpen: () => void;
     isOpen: boolean;
 }
 
-const SidebarContent = ({ onClose, isOpen, ...rest }: SidebarProps) => {
+const SidebarContent = ({ onClose, onOpen, isOpen, ...rest }: SidebarProps) => {
     return (
         <Box
             borderRight="1px"
@@ -62,25 +66,59 @@ const SidebarContent = ({ onClose, isOpen, ...rest }: SidebarProps) => {
             h="full"
             {...rest}
         >
-            <Flex h="20" alignItems="center" mx={4} justifyContent="space-between">
+            <Flex
+                h="20"
+                alignItems="center"
+                mx={4}
+                justifyContent="space-between"
+                position="relative"
+            >
                 <Text
                     fontSize="2xl"
                     fontFamily="monospace"
                     fontWeight="bold"
-                    display={isOpen ? "flex" : "none"}
+                    opacity={isOpen ? "1" : "0"}
+                    transition="0.2s ease-in"
+                    position="absolute"
                 >
                     Logo
                 </Text>
-                <IconButton
-                    icon={<FiChevronsLeft fontSize="16" />}
-                    onClick={onClose}
-                    aria-label="open menu"
-                    w="100%"
-                />
+                <Box mb={2} ml="auto">
+                    <Button
+                        bg="whiteAlpha.200"
+                        color="white"
+                        size="xl"
+                        justifyContent="start"
+                        p="4"
+                        borderRadius="lg"
+                        cursor="pointer"
+                        _hover={{ bg: "teal.200", color: "black" }}
+                        onClick={isOpen ? onClose : onOpen}
+                        aria-label="open menu"
+                    >
+                        <Icon
+                            fontSize="16"
+                            as={FiChevronsLeft}
+                            transform={`rotate(${isOpen ? "0deg" : "180deg"})`}
+                            transition="opacity 0.2s ease-in"
+                        />
+                    </Button>
+                </Box>
             </Flex>
-            {LinkItems.map((link) => (
-                <NavItem key={link.name} link={link.link} icon={link.icon}>
-                    {isOpen && link.name}
+
+            {LinkItems.map((link, index) => (
+                <NavItem key={index} link={link.link} icon={link.icon}>
+                    <Tooltip
+                        hasArrow
+                        label={link.tooltip}
+                        openDelay={300}
+                        placement="right"
+                        isDisabled={isOpen}
+                    >
+                        <Text opacity={isOpen ? "1" : "0"} transition="opacity 0.2s ease-in">
+                            {link.name}
+                        </Text>
+                    </Tooltip>
                 </NavItem>
             ))}
         </Box>
@@ -108,6 +146,8 @@ const NavItem = ({ icon, link, children, ...rest }: NavItemProps) => {
                 cursor="pointer"
                 _hover={{ bg: "teal.200", color: "black" }}
                 onClick={() => navigate(link)}
+                overflowWrap="break-word"
+                overflow="hidden"
             >
                 {icon && <Icon mr="4" fontSize="16" as={icon} />}
                 {children}
@@ -213,29 +253,17 @@ const SidebarWithHeader = () => {
         <Box minH="100vh" bg="gray.900">
             <SidebarContent
                 isOpen={isOpen}
-                onClose={() => onClose}
-                display={{ base: "none", md: "block" }}
-                transition="1.5s ease-in-out"
-            />
-            <Drawer
-                autoFocus={false}
-                isOpen={isOpen}
-                placement="left"
                 onClose={onClose}
-                returnFocusOnClose={false}
-                onOverlayClick={onClose}
-                size="full"
-            >
-                <DrawerContent>
-                    <SidebarContent isOpen={isOpen} onClose={onClose} />
-                </DrawerContent>
-            </Drawer>
+                onOpen={onOpen}
+                display={{ base: "none", md: "block" }}
+                transition="0.4s ease-in-out"
+            />
 
-            <NavHeader isOpen={isOpen} onOpen={onOpen} transition="1.5s ease-in-out" />
+            <NavHeader isOpen={isOpen} onOpen={onOpen} transition="0.4s ease-in-out" />
             <Box
                 ml={{ base: 0, md: isOpen ? "15rem" : "5rem" }}
                 p="4"
-                transition="1.5s ease-in-out"
+                transition="0.4s ease-in-out"
             >
                 <Outlet />
             </Box>

@@ -7,7 +7,7 @@ const Test = (props: PropsWithChildren<{}>) => {
     const [name, setName] = useState("");
 
     return name !== "" ? (
-        <ReactFlvPlayer url={`http://localhost:3490/live/${name}.flv`} isLive={true} />
+        <ReactFlvPlayer url={`http://18.143.74.14:3490/live/${name}.flv`} isLive={true} />
     ) : (
         <Input onBlur={(e) => setName(e.target.value)} />
     );
