@@ -14,9 +14,11 @@ const StreamCard = () => {
     return (
         <Box maxW="sm" borderRadius="lg" overflow="hidden">
             <AspectRatio ratio={16 / 10}>
-                <Image src={Video} alt="Video image here" />
+                {/* Use Video Thumbnail */}
+                <Image src={Video} alt="Video Thumbnail here" />
             </AspectRatio>
             <Box display="flex" alignItems="topline" mt={2}>
+                {/* Streamer Avatar */}
                 <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
                 <Stack spacing={0.4}>
                     <Heading as="h5" size="sm" color={"white"} ml={1}>
