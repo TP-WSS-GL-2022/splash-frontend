@@ -14,7 +14,7 @@ const Test: FC<PropsWithChildren<{}>> = props => {
                 <Box>
                     <ChatSidebar />
                     <ReactFlvPlayer
-                        url={`http://18.143.74.14:3490/live/${name}.flv`}
+                        url={`http://18.143.74.14:6969/api/${name}/live.flv`}
                         isLive={true}
                     />
                 </Box>
