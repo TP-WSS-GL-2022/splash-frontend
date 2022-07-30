@@ -4,13 +4,12 @@ import {
     Box, Button, Flex, Highlight, HStack, Input, Spacer, Text, VStack
 } from "@chakra-ui/react";
 
-
-interface ChatMessageProps {
+export interface ChatMessageProps {
     // author: User ??
     authorName: string; // temp
 }
 
-const ChatMessage: FC<PropsWithChildren<ChatMessageProps>> = props => {
+export const ChatMessage: FC<PropsWithChildren<ChatMessageProps>> = props => {
     const { authorName, children: message } = props;
 
     return (
@@ -25,6 +24,7 @@ const ChatMessage: FC<PropsWithChildren<ChatMessageProps>> = props => {
         </Text>
     );
 };
+
 
 const ChatSidebar: FC = () => {
     return (
@@ -66,4 +66,4 @@ const ChatSidebar: FC = () => {
     );
 };
 
-export { ChatMessage as Message, ChatSidebar as Sidebar };
+export default ChatSidebar;
