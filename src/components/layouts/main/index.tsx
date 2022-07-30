@@ -1,7 +1,7 @@
+import { Box, HStack, useDisclosure, VStack } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
-import { Box, HStack, VStack, useDisclosure } from "@chakra-ui/react";
-import SidebarContent from "./Sidebar";
 import NavHeader from "./NavHeader";
+import SidebarContent from "./Sidebar";
 
 const SidebarWithHeader = () => {
     const { isOpen, onToggle } = useDisclosure();

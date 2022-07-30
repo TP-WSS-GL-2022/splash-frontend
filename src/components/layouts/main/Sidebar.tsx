@@ -1,23 +1,22 @@
 import {
     Box,
     BoxProps,
-    Flex,
-    IconButton,
-    Icon,
-    Text,
-    VStack,
     Button,
-    FlexProps,
+    Flex,
+    Icon,
+    IconButton,
+    Text,
     Tooltip,
+    VStack,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { IconType } from "react-icons";
 import {
-    FiHome,
-    FiCompass,
-    FiStar,
-    FiSettings,
     FiChevronsLeft,
+    FiCompass,
+    FiHome,
+    FiSettings,
+    FiStar,
 } from "react-icons/fi";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppRoute } from "../../../util/routes";

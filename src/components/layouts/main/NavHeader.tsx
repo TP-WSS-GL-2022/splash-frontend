@@ -15,8 +15,9 @@ import {
     Text,
     useDisclosure,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { FiMenu, FiVideo } from "react-icons/fi";
-import AuthModal from "./Modal";
+import AuthModal from "./modal";
 import SidebarContent from "./Sidebar";
 
 // TODO: Replace with a hook to see the auth state
@@ -33,20 +34,15 @@ const NavHeader = ({ onToggle, isOpen }: NavHeaderProps) => {
         onOpen: modalOnOpen,
         onClose: modalOnClose,
     } = useDisclosure();
-    const {
-        isOpen: authState,
-        onOpen: setLogin,
-        onClose: setSignUp,
-        onToggle: toggleAuthState,
-    } = useDisclosure();
+    const [authState, setAuthState] = useState(0);
 
     const openLogin = () => {
-        setLogin();
+        setAuthState(0);
         modalOnOpen();
     };
 
     const openSignUp = () => {
-        setSignUp();
+        setAuthState(1);
         modalOnOpen();
     };
     return (
@@ -150,9 +146,7 @@ const NavHeader = ({ onToggle, isOpen }: NavHeaderProps) => {
                 isOpen={modalIsOpen}
                 onClose={modalOnClose}
                 authState={authState}
-                setLogin={setLogin}
-                setSignUp={setSignUp}
-                onToggle={toggleAuthState}
+                setAuthState={setAuthState}
             />
         </Flex>
     );
