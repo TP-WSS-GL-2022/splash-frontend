@@ -1,10 +1,24 @@
 import { FC, PropsWithChildren } from "react";
 import { IconType } from "react-icons";
-import { FiChevronsLeft, FiCompass, FiHome, FiSettings, FiStar } from "react-icons/fi";
+import {
+    FiChevronsLeft,
+    FiCompass,
+    FiHome,
+    FiSettings,
+    FiStar,
+} from "react-icons/fi";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import {
-    Box, BoxProps, Button, Flex, Icon, IconButton, Text, Tooltip, useDisclosure, VStack
+    Box,
+    BoxProps,
+    Button,
+    Flex,
+    Icon,
+    IconButton,
+    Text,
+    Tooltip,
+    VStack,
 } from "@chakra-ui/react";
 
 import { AppRoute } from "../../../util/routes";
@@ -78,19 +92,19 @@ const HomeSidebarItem: FC<HomeSidebarItemProps> = ({
     );
 };
 
-interface HomeSidebarProps extends BoxProps {}
+interface HomeSidebarProps extends BoxProps {
+    open: boolean;
+    toggle: () => void;
+}
 
-const HomeSidebar: FC<HomeSidebarProps> = ({ ...rest }) => {
-    const { isOpen, onToggle } = useDisclosure();
-
+const HomeSidebar: FC<HomeSidebarProps> = ({ open, toggle, ...rest }) => {
     return (
         <Box
             alignSelf="stretch"
             borderRight="1px"
             borderRightColor="gray.700"
             transition="0.4s ease-in-out"
-            display={{ base: "none", md: "block" }}
-            w={{ base: "full", md: isOpen ? "15rem" : "5rem" }}
+            w={{ base: "full", md: open ? "15rem" : "5rem" }}
             {...rest}
         >
             <Box pos="sticky" top={0} mx={4}>
@@ -104,7 +118,7 @@ const HomeSidebar: FC<HomeSidebarProps> = ({ ...rest }) => {
                     <Text
                         fontSize="2xl"
                         fontWeight="bold"
-                        opacity={isOpen ? "1" : "0"}
+                        opacity={open ? "1" : "0"}
                         transition="0.2s ease-in"
                         position="absolute"
                     >
@@ -116,7 +130,7 @@ const HomeSidebar: FC<HomeSidebarProps> = ({ ...rest }) => {
                             <Icon
                                 as={FiChevronsLeft}
                                 transform={`rotate(${
-                                    isOpen ? "0deg" : "180deg"
+                                    open ? "0deg" : "180deg"
                                 })`}
                                 transition="opacity 0.2s ease-in, transform 0.2s ease-in"
                             />
@@ -129,7 +143,7 @@ const HomeSidebar: FC<HomeSidebarProps> = ({ ...rest }) => {
                         bg="whiteAlpha.200"
                         borderRadius="lg"
                         _hover={{ bg: "teal.200", color: "black" }}
-                        onClick={onToggle}
+                        onClick={toggle}
                     />
                 </Flex>
 
@@ -139,12 +153,12 @@ const HomeSidebar: FC<HomeSidebarProps> = ({ ...rest }) => {
                             key={index}
                             icon={item.icon}
                             link={item.link}
-                            isSidebarOpen={isOpen}
+                            isSidebarOpen={open}
                             tooltipLabel={item.name}
                         >
                             <Text
                                 fontSize="md"
-                                opacity={isOpen ? "1" : "0"}
+                                opacity={open ? "1" : "0"}
                                 transition="opacity 0.2s ease-in"
                             >
                                 {item.name}

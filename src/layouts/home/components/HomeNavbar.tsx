@@ -2,17 +2,27 @@ import { FC } from "react";
 import { FiMenu, FiVideo } from "react-icons/fi";
 
 import {
-    Avatar, Button, Drawer, DrawerContent, Flex, FlexProps, HStack, IconButton, Menu, MenuButton,
-    MenuDivider, MenuItem, MenuList, Text, useDisclosure
+    Avatar,
+    Button,
+    Drawer,
+    DrawerContent,
+    Flex,
+    HStack,
+    IconButton,
+    Menu,
+    MenuButton,
+    MenuDivider,
+    MenuItem,
+    MenuList,
+    Text,
+    useDisclosure,
 } from "@chakra-ui/react";
 
 import { useAuth } from "../../../hooks/useAuth";
 import HomeSidebar from "./HomeSidebar";
 
-interface HomeNavbarProps extends FlexProps {}
-
-const HomeNavbar: FC = ({ ...rest }: HomeNavbarProps) => {
-    const { isOpen, onToggle } = useDisclosure();
+const HomeNavbar: FC = () => {
+    const { isOpen: drawerIsOpen, onToggle: toggleDrawer } = useDisclosure();
     const { isLoggedIn } = useAuth();
 
     return (
@@ -28,7 +38,7 @@ const HomeNavbar: FC = ({ ...rest }: HomeNavbarProps) => {
         >
             <IconButton
                 display={{ base: "flex", md: "none" }}
-                onClick={onToggle}
+                onClick={toggleDrawer}
                 variant="outline"
                 aria-label="open menu"
                 icon={<FiMenu />}
@@ -36,14 +46,14 @@ const HomeNavbar: FC = ({ ...rest }: HomeNavbarProps) => {
 
             <Drawer
                 autoFocus={false}
-                isOpen={isOpen}
+                isOpen={drawerIsOpen}
                 placement="left"
-                onClose={onToggle}
+                onClose={toggleDrawer}
                 returnFocusOnClose={false}
-                onOverlayClick={onToggle}
+                onOverlayClick={toggleDrawer}
             >
                 <DrawerContent>
-                    <HomeSidebar />
+                    <HomeSidebar open={drawerIsOpen} toggle={toggleDrawer} />
                 </DrawerContent>
             </Drawer>
 
