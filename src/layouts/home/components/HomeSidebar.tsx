@@ -1,10 +1,25 @@
 import { FC, PropsWithChildren } from "react";
 import { IconType } from "react-icons";
-import { FiChevronsLeft, FiCompass, FiHome, FiSettings, FiStar } from "react-icons/fi";
+import {
+    FiChevronsLeft,
+    FiCompass,
+    FiHome,
+    FiSettings,
+    FiStar,
+} from "react-icons/fi";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import {
-    Box, BoxProps, Button, Flex, Icon, IconButton, Text, Tooltip, useDisclosure, VStack
+    Box,
+    BoxProps,
+    Button,
+    Flex,
+    Icon,
+    IconButton,
+    Text,
+    Tooltip,
+    useDisclosure,
+    VStack,
 } from "@chakra-ui/react";
 
 import { AppRoute } from "../../../util/routes";

@@ -1,5 +1,5 @@
 export {
-    default as ChatSidebar,
     ChatMessage,
+    default as ChatSidebar,
     type ChatMessageProps,
 } from "./ChatSidebar";

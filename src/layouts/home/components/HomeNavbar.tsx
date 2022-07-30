@@ -7,7 +7,6 @@ import {
     Drawer,
     DrawerContent,
     Flex,
-    FlexProps,
     HStack,
     IconButton,
     Menu,
@@ -20,8 +19,8 @@ import {
 } from "@chakra-ui/react";
 
 import { useAuth } from "../../../hooks/useAuth";
-import HomeSidebar from "./HomeSidebar";
 import AuthModal from "./AuthModal";
+import HomeSidebar from "./HomeSidebar";
 
 const HomeNavbar: FC = () => {
     const { isOpen, onToggle } = useDisclosure();

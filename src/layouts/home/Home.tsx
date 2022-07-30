@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
 
-import { Box, HStack, useDisclosure, VStack } from "@chakra-ui/react";
+import { Box, HStack, VStack } from "@chakra-ui/react";
 
 import { HomeNavbar, HomeSidebar } from "./components/";
 

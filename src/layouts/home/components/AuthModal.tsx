@@ -15,9 +15,8 @@ import {
     TabPanel,
     TabPanels,
     Tabs,
-    Text,
 } from "@chakra-ui/react";
-import { Field, FieldProps, Form, Formik, useFormik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { Dispatch, SetStateAction } from "react";
 
 interface StateInterface {
