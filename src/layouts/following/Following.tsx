@@ -1,27 +1,46 @@
 import { FC } from "react";
 
-import { Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Divider, Heading, SimpleGrid } from "@chakra-ui/react";
 
-import StreamCard from "../../components/features/streamCard";
+import StreamThumbnail from "./components/StreamThumbnail";
 
 const Following: FC = () => {
     return (
-        <div>
-            <Heading fontSize="4xl" color="white">
-                FOLLOWING
+        <Box p="8">
+            <Heading size="xl" color="teal.200">
+                Following
             </Heading>
-            {/* <Divider orientation='horizontal' /> */}
-            <Text fontSize="2xl" color="white">
-                Live channels
-            </Text>
-            <SimpleGrid minChildWidth='240px' spacing='40px'>
-                <StreamCard/>
-                <StreamCard/>
-                <StreamCard/>
-                <StreamCard/>
-                <StreamCard/>
-            </SimpleGrid>
-        </div>
+
+            <Box mt="8">
+                <Heading mb="4" size="lg" color="white">
+                    Live Broadcasts
+                </Heading>
+                <SimpleGrid minChildWidth="80" spacing="8">
+                    <StreamThumbnail />
+                    <StreamThumbnail />
+                    <StreamThumbnail />
+                    <StreamThumbnail />
+                    <StreamThumbnail />
+                </SimpleGrid>
+            </Box>
+
+            <Divider my="12" opacity="20%" />
+
+            <Box>
+                <Heading mb="4" size="lg" color="white">
+                    Past Broadcasts
+                </Heading>
+                <SimpleGrid minChildWidth="80" spacing="8">
+                    <StreamThumbnail />
+                    <StreamThumbnail />
+                    <StreamThumbnail />
+                    <StreamThumbnail />
+                    <StreamThumbnail />
+                    <StreamThumbnail />
+                    <StreamThumbnail />
+                </SimpleGrid>
+            </Box>
+        </Box>
     );
 };
 
