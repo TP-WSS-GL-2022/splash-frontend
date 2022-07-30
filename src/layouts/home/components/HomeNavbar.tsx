@@ -1,18 +1,42 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { FiMenu, FiVideo } from "react-icons/fi";
 
 import {
-    Avatar, Button, Drawer, DrawerContent, Flex, FlexProps, HStack, IconButton, Menu, MenuButton,
-    MenuDivider, MenuItem, MenuList, Text, useDisclosure
+    Avatar,
+    Button,
+    Drawer,
+    DrawerContent,
+    Flex,
+    FlexProps,
+    HStack,
+    IconButton,
+    Menu,
+    MenuButton,
+    MenuDivider,
+    MenuItem,
+    MenuList,
+    Text,
+    useDisclosure,
 } from "@chakra-ui/react";
 
 import { useAuth } from "../../../hooks/useAuth";
 import HomeSidebar from "./HomeSidebar";
+import AuthModal from "./AuthModal";
 
-interface HomeNavbarProps extends FlexProps {}
-
-const HomeNavbar: FC = ({ ...rest }: HomeNavbarProps) => {
+const HomeNavbar: FC = () => {
     const { isOpen, onToggle } = useDisclosure();
+    const [modalState, setModalState] = useState({
+        selector: 0,
+        isOpen: false,
+    });
+
+    const openLogin = () => {
+        setModalState({ selector: 0, isOpen: true });
+    };
+
+    const openSignUp = () => {
+        setModalState({ selector: 1, isOpen: true });
+    };
     const { isLoggedIn } = useAuth();
 
     return (
@@ -94,19 +118,25 @@ const HomeNavbar: FC = ({ ...rest }: HomeNavbarProps) => {
                     </>
                 ) : (
                     <>
-                        <Button fontWeight={400} variant={"ghost"}>
+                        <Button
+                            fontWeight={400}
+                            variant={"ghost"}
+                            onClick={openLogin}
+                        >
                             Sign In
                         </Button>
                         <Button
                             display={{ base: "none", md: "inline-flex" }}
                             fontWeight={600}
                             colorScheme={"teal"}
+                            onClick={openSignUp}
                         >
                             Sign Up
                         </Button>
                     </>
                 )}
             </HStack>
+            <AuthModal state={modalState} setState={setModalState} />
         </Flex>
     );
 };

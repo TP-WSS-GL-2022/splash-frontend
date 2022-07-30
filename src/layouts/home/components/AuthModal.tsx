@@ -20,11 +20,14 @@ import {
 import { Field, FieldProps, Form, Formik, useFormik } from "formik";
 import { Dispatch, SetStateAction } from "react";
 
-interface AuthModalProps {
+interface StateInterface {
+    selector: number;
     isOpen: boolean;
-    onClose: () => void;
-    authState: number;
-    setAuthState: Dispatch<SetStateAction<number>>;
+}
+
+interface AuthModalProps {
+    state: StateInterface;
+    setState: Dispatch<SetStateAction<StateInterface>>;
 }
 
 interface loginData {
@@ -39,13 +42,9 @@ interface signUpData {
     confirmPassword: string;
 }
 
-const AuthModal = ({
-    isOpen,
-    onClose,
-    authState,
-    setAuthState,
-}: AuthModalProps) => {
-    const handleTabsChange = (index: number) => setAuthState(index);
+const AuthModal = ({ state, setState }: AuthModalProps) => {
+    const handleTabsChange = (index: number) =>
+        setState({ ...state, selector: index });
     const validateEmail = (value: string) => {
         let error = "";
 
@@ -119,17 +118,22 @@ const AuthModal = ({
     };
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal
+            isOpen={state.isOpen}
+            onClose={() => setState({ ...state, isOpen: false })}
+        >
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader>
-                    {authState == 0 ? "Log in to Splash" : "Join Splash today"}
+                    {state.selector == 0
+                        ? "Log in to Splash"
+                        : "Join Splash today"}
                 </ModalHeader>
                 <ModalCloseButton top={3.5} />
 
                 <ModalBody pb={4}>
                     <Tabs
-                        index={authState}
+                        index={state.selector}
                         onChange={handleTabsChange}
                         colorScheme="teal"
                     >
@@ -285,6 +289,7 @@ const AuthModal = ({
                                                     touched.confirmPassword &&
                                                     !!errors.confirmPassword
                                                 }
+                                                isRequired
                                             >
                                                 <FormLabel htmlFor="confirmPassword">
                                                     Confirm Password
