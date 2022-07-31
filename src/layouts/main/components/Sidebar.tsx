@@ -1,27 +1,13 @@
-import { FC, PropsWithChildren } from "react";
-import { IconType } from "react-icons";
-import {
-    FiChevronsLeft,
-    FiCompass,
-    FiHome,
-    FiSettings,
-    FiStar,
-} from "react-icons/fi";
-import { useLocation, useNavigate } from "react-router-dom";
+import { FC, PropsWithChildren } from 'react';
+import { IconType } from 'react-icons';
+import { FiChevronsLeft, FiCompass, FiHome, FiSettings, FiStar } from 'react-icons/fi';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
-    Box,
-    BoxProps,
-    Button,
-    Flex,
-    Icon,
-    IconButton,
-    Text,
-    Tooltip,
-    VStack,
-} from "@chakra-ui/react";
+    Box, BoxProps, Button, Flex, Icon, IconButton, Text, Tooltip, VStack,
+} from '@chakra-ui/react';
 
-import { AppRoute } from "../../../util/routes";
+import { AppRoute } from '../../../util/routes';
 
 interface HomeSidebarItemProps extends PropsWithChildren<BoxProps> {
     icon: IconType;

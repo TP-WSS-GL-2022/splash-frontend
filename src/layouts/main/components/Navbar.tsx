@@ -1,25 +1,13 @@
-import { FC } from "react";
-import { FiMenu, FiVideo } from "react-icons/fi";
+import { FC } from 'react';
+import { FiMenu, FiVideo } from 'react-icons/fi';
 
 import {
-    Avatar,
-    Button,
-    Drawer,
-    DrawerContent,
-    Flex,
-    HStack,
-    IconButton,
-    Menu,
-    MenuButton,
-    MenuDivider,
-    MenuItem,
-    MenuList,
-    Text,
-    useDisclosure,
-} from "@chakra-ui/react";
+    Avatar, Button, Drawer, DrawerContent, Flex, HStack, IconButton, Menu, MenuButton, MenuDivider,
+    MenuItem, MenuList, Text, useDisclosure,
+} from '@chakra-ui/react';
 
-import { useAuth } from "../../../hooks/useAuth";
-import HomeSidebar from "./HomeSidebar";
+import { useAuth } from '../../../hooks/useAuth';
+import HomeSidebar from './Sidebar';
 
 const HomeNavbar: FC = () => {
     const { isOpen: drawerIsOpen, onToggle: toggleDrawer } = useDisclosure();

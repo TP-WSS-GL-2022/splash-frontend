@@ -1,8 +1,6 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from 'react';
 
-import {
-    Box, Button, Flex, Highlight, HStack, Input, Spacer, Text, VStack
-} from "@chakra-ui/react";
+import { Button, Flex, Highlight, Input, Spacer, Text, VStack } from '@chakra-ui/react';
 
 export interface ChatMessageProps {
     // author: User ??
@@ -24,7 +22,6 @@ export const ChatMessage: FC<PropsWithChildren<ChatMessageProps>> = props => {
         </Text>
     );
 };
-
 
 const ChatSidebar: FC = () => {
     return (
