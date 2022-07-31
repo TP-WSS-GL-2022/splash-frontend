@@ -1,13 +1,29 @@
-import { FC, PropsWithChildren } from 'react';
-import { IconType } from 'react-icons';
-import { FiChevronsLeft, FiCompass, FiHome, FiSettings, FiStar } from 'react-icons/fi';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { FC, PropsWithChildren } from "react";
+import { IconType } from "react-icons";
+import {
+    FiChevronsLeft,
+    FiCompass,
+    FiHome,
+    FiSettings,
+    FiStar,
+} from "react-icons/fi";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
-    Box, BoxProps, Button, Flex, Icon, IconButton, Text, Tooltip, VStack,
-} from '@chakra-ui/react';
+    Box,
+    BoxProps,
+    Button,
+    Flex,
+    Icon,
+    IconButton,
+    Text,
+    Tooltip,
+    VStack,
+    Image,
+    Stack,
+} from "@chakra-ui/react";
 
-import { AppRoute } from '../../../util/routes';
+import { AppRoute } from "../../../util/routes";
 
 interface SidebarItemProps extends PropsWithChildren<BoxProps> {
     icon: IconType;
@@ -101,6 +117,12 @@ const Sidebar: FC<SidebarProps> = ({ open, toggle, ...rest }) => {
                     position="relative"
                 >
                     {/* TODO: Change to a Logo SVG or PNG and */}
+
+                    {/* <Image
+                        boxSize='50px'
+                        objectFit='cover'
+                        src='assets\splash.png'
+                    /> */}
                     <Text
                         fontSize="2xl"
                         fontWeight="bold"

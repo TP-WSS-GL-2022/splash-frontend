@@ -1,6 +1,8 @@
 import { FC, useState } from "react";
 import { FiMenu, FiVideo } from "react-icons/fi";
 
+import { useNavigate } from 'react-router-dom';
+
 import {
     Avatar,
     Button,
@@ -26,7 +28,7 @@ const Navbar: FC = () => {
     const { isOpen: drawerIsOpen, onToggle: toggleDrawer } = useDisclosure();
     const [modalState, setModalState] = useState({ index: 0, isOpen: false });
     const { isLoggedIn } = useAuth();
-
+    const navigate = useNavigate();
     return (
         <Flex
             h="20"
