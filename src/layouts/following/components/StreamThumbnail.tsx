@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { AspectRatio, Avatar, Box, Heading, HStack, Image, Text, VStack } from "@chakra-ui/react";
+import { AspectRatio, Avatar, Box, Heading, HStack, Image, Text, VStack } from '@chakra-ui/react';
 
-import placeholderStream from "./placeholder_stream.jpg";
+import placeholderStream from './placeholder_stream.jpg';
 
 const StreamThumbnail: FC = () => {
     return (

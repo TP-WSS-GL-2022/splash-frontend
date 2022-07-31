@@ -1,8 +1,16 @@
-import { FC } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { FC } from "react";
+import { Route, Routes } from "react-router-dom";
 
-import { Error, Explore, Following, Home, Landing, MainLayout, Test, Signin, Signup } from './layouts';
-import { AppRoute } from './util/routes';
+import {
+    Error,
+    Explore,
+    Following,
+    Home,
+    Landing,
+    MainLayout,
+    Test,
+} from "./layouts";
+import { AppRoute } from "./util/routes";
 
 const App: FC = () => {
     return (

@@ -1,18 +1,32 @@
-import { FC } from 'react';
-import { FiMenu, FiVideo } from 'react-icons/fi';
+import { FC, useState } from "react";
+import { FiMenu, FiVideo } from "react-icons/fi";
 
 import { useNavigate } from 'react-router-dom';
 
 import {
-    Avatar, Button, Drawer, DrawerContent, Flex, HStack, IconButton, Menu, MenuButton, MenuDivider,
-    MenuItem, MenuList, Text, useDisclosure,
-} from '@chakra-ui/react';
+    Avatar,
+    Button,
+    Drawer,
+    DrawerContent,
+    Flex,
+    HStack,
+    IconButton,
+    Menu,
+    MenuButton,
+    MenuDivider,
+    MenuItem,
+    MenuList,
+    Text,
+    useDisclosure,
+} from "@chakra-ui/react";
 
-import { useAuth } from '../../../hooks/useAuth';
-import HomeSidebar from './Sidebar';
+import { useAuth } from "../../../hooks/useAuth";
+import { AuthModal } from "./modal";
+import Sidebar from "./Sidebar";
 
-const HomeNavbar: FC = () => {
+const Navbar: FC = () => {
     const { isOpen: drawerIsOpen, onToggle: toggleDrawer } = useDisclosure();
+    const [modalState, setModalState] = useState({ index: 0, isOpen: false });
     const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
     return (
@@ -43,7 +57,7 @@ const HomeNavbar: FC = () => {
                 onOverlayClick={toggleDrawer}
             >
                 <DrawerContent>
-                    <HomeSidebar open={drawerIsOpen} toggle={toggleDrawer} />
+                    <Sidebar open={drawerIsOpen} toggle={toggleDrawer} />
                 </DrawerContent>
             </Drawer>
 
@@ -94,22 +108,31 @@ const HomeNavbar: FC = () => {
                     </>
                 ) : (
                     <>
-                        <Button fontWeight={400} variant={"ghost"} onClick={() => navigate("./Signin")}>
+                        <Button
+                            fontWeight={400}
+                            variant={"ghost"}
+                            onClick={() =>
+                                setModalState({ index: 0, isOpen: true })
+                            }
+                        >
                             Sign In
                         </Button>
                         <Button
                             display={{ base: "none", md: "inline-flex" }}
                             fontWeight={600}
                             colorScheme={"teal"}
-                            onClick={() => navigate("./Signup")}
+                            onClick={() =>
+                                setModalState({ index: 1, isOpen: true })
+                            }
                         >
                             Sign Up
                         </Button>
                     </>
                 )}
             </HStack>
+            <AuthModal state={modalState} setState={setModalState} />
         </Flex>
     );
 };
 
-export default HomeNavbar;
+export default Navbar;

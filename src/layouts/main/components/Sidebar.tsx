@@ -1,15 +1,31 @@
-import { FC, PropsWithChildren } from 'react';
-import { IconType } from 'react-icons';
-import { FiChevronsLeft, FiCompass, FiHome, FiSettings, FiStar } from 'react-icons/fi';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { FC, PropsWithChildren } from "react";
+import { IconType } from "react-icons";
+import {
+    FiChevronsLeft,
+    FiCompass,
+    FiHome,
+    FiSettings,
+    FiStar,
+} from "react-icons/fi";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
-    Box, BoxProps, Button, Flex, Icon, IconButton, Text, Tooltip, VStack, Image, Stack
-} from '@chakra-ui/react';
+    Box,
+    BoxProps,
+    Button,
+    Flex,
+    Icon,
+    IconButton,
+    Text,
+    Tooltip,
+    VStack,
+    Image,
+    Stack,
+} from "@chakra-ui/react";
 
-import { AppRoute } from '../../../util/routes';
+import { AppRoute } from "../../../util/routes";
 
-interface HomeSidebarItemProps extends PropsWithChildren<BoxProps> {
+interface SidebarItemProps extends PropsWithChildren<BoxProps> {
     icon: IconType;
     link: AppRoute;
     isSidebarOpen: boolean;
@@ -39,7 +55,7 @@ const sidebarItems = [
     },
 ];
 
-const HomeSidebarItem: FC<HomeSidebarItemProps> = ({
+const SidebarItem: FC<SidebarItemProps> = ({
     link,
     icon,
     children,
@@ -78,12 +94,12 @@ const HomeSidebarItem: FC<HomeSidebarItemProps> = ({
     );
 };
 
-interface HomeSidebarProps extends BoxProps {
+interface SidebarProps extends BoxProps {
     open: boolean;
     toggle: () => void;
 }
 
-const HomeSidebar: FC<HomeSidebarProps> = ({ open, toggle, ...rest }) => {
+const Sidebar: FC<SidebarProps> = ({ open, toggle, ...rest }) => {
     return (
         <Box
             alignSelf="stretch"
@@ -101,12 +117,12 @@ const HomeSidebar: FC<HomeSidebarProps> = ({ open, toggle, ...rest }) => {
                     position="relative"
                 >
                     {/* TODO: Change to a Logo SVG or PNG and */}
-                    
-                    <Image
+
+                    {/* <Image
                         boxSize='50px'
                         objectFit='cover'
                         src='assets\splash.png'
-                    />
+                    /> */}
                     <Text
                         fontSize="2xl"
                         fontWeight="bold"
@@ -141,7 +157,7 @@ const HomeSidebar: FC<HomeSidebarProps> = ({ open, toggle, ...rest }) => {
 
                 <VStack mt={4} spacing={2}>
                     {sidebarItems.map((item, index) => (
-                        <HomeSidebarItem
+                        <SidebarItem
                             key={index}
                             icon={item.icon}
                             link={item.link}
@@ -155,7 +171,7 @@ const HomeSidebar: FC<HomeSidebarProps> = ({ open, toggle, ...rest }) => {
                             >
                                 {item.name}
                             </Text>
-                        </HomeSidebarItem>
+                        </SidebarItem>
                     ))}
                 </VStack>
             </Box>
@@ -163,4 +179,4 @@ const HomeSidebar: FC<HomeSidebarProps> = ({ open, toggle, ...rest }) => {
     );
 };
 
-export default HomeSidebar;
+export default Sidebar;
