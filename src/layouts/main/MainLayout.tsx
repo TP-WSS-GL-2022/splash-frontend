@@ -1,23 +1,28 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Box, HStack, VStack } from '@chakra-ui/react';
+import { Box, HStack, useDisclosure, VStack } from '@chakra-ui/react';
 
-import { Navbar, Sidebar } from './components';
+import { HomeNavbar, HomeSidebar } from './components';
 
 const MainLayout: FC = () => {
-   return (
-      <HStack minH="100vh" bg="gray.900" align="stretch" gap="0">
-         <Sidebar />
+    const { isOpen: sidebarIsOpen, onToggle: toggleSidebar } = useDisclosure();
+    return (
+        <HStack minH="100vh" bg="gray.900" align="stretch" gap="0">
+            <HomeSidebar
+                display={{ base: "none", md: "block" }}
+                open={sidebarIsOpen}
+                toggle={toggleSidebar}
+            />
 
-         <VStack flex="1" m="0 !important">
-            <Navbar />
-            <Box flex="1" m="0 !important" alignSelf="stretch">
-               <Outlet />
-            </Box>
-         </VStack>
-      </HStack>
-   );
+            <VStack flex="1" m="0 !important">
+                <HomeNavbar />
+                <Box flex="1" m="0 !important" alignSelf="stretch">
+                    <Outlet />
+                </Box>
+            </VStack>
+        </HStack>
+    );
 };
 
 export default MainLayout;
