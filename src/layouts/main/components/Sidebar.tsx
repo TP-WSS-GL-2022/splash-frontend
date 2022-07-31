@@ -4,7 +4,7 @@ import { FiChevronsLeft, FiCompass, FiHome, FiSettings, FiStar } from 'react-ico
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
-    Box, BoxProps, Button, Flex, Icon, IconButton, Text, Tooltip, VStack,
+    Box, BoxProps, Button, Flex, Icon, IconButton, Text, Tooltip, VStack, Image, Stack
 } from '@chakra-ui/react';
 
 import { AppRoute } from '../../../util/routes';
@@ -101,6 +101,12 @@ const HomeSidebar: FC<HomeSidebarProps> = ({ open, toggle, ...rest }) => {
                     position="relative"
                 >
                     {/* TODO: Change to a Logo SVG or PNG and */}
+                    
+                    <Image
+                        boxSize='50px'
+                        objectFit='cover'
+                        src='assets\splash.png'
+                    />
                     <Text
                         fontSize="2xl"
                         fontWeight="bold"
@@ -110,14 +116,14 @@ const HomeSidebar: FC<HomeSidebarProps> = ({ open, toggle, ...rest }) => {
                     >
                         Splash
                     </Text>
+                   
 
                     <IconButton
                         icon={
                             <Icon
                                 as={FiChevronsLeft}
-                                transform={`rotate(${
-                                    open ? "0deg" : "180deg"
-                                })`}
+                                transform={`rotate(${open ? "0deg" : "180deg"
+                                    })`}
                                 transition="opacity 0.2s ease-in, transform 0.2s ease-in"
                             />
                         }

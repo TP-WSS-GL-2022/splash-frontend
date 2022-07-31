@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { FiMenu, FiVideo } from 'react-icons/fi';
 
+import { useNavigate } from 'react-router-dom';
+
 import {
     Avatar, Button, Drawer, DrawerContent, Flex, HStack, IconButton, Menu, MenuButton, MenuDivider,
     MenuItem, MenuList, Text, useDisclosure,
@@ -12,7 +14,7 @@ import HomeSidebar from './Sidebar';
 const HomeNavbar: FC = () => {
     const { isOpen: drawerIsOpen, onToggle: toggleDrawer } = useDisclosure();
     const { isLoggedIn } = useAuth();
-
+    const navigate = useNavigate();
     return (
         <Flex
             h="20"
@@ -92,13 +94,14 @@ const HomeNavbar: FC = () => {
                     </>
                 ) : (
                     <>
-                        <Button fontWeight={400} variant={"ghost"}>
+                        <Button fontWeight={400} variant={"ghost"} onClick={() => navigate("./Signin")}>
                             Sign In
                         </Button>
                         <Button
                             display={{ base: "none", md: "inline-flex" }}
                             fontWeight={600}
                             colorScheme={"teal"}
+                            onClick={() => navigate("./Signup")}
                         >
                             Sign Up
                         </Button>
