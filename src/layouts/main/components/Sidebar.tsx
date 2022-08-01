@@ -118,28 +118,31 @@ const Sidebar: FC<SidebarProps> = ({ open, toggle, ...rest }) => {
                 >
                     {/* TODO: Change to a Logo SVG or PNG and */}
 
-                    {/* <Image
-                        boxSize='50px'
-                        objectFit='cover'
-                        src='assets\splash.png'
-                    /> */}
-                    <Text
-                        fontSize="2xl"
-                        fontWeight="bold"
+                    <Flex
+                        alignItems="center"
+                        gap={2}
                         opacity={open ? "1" : "0"}
                         transition="0.2s ease-in"
-                        position="absolute"
+                        overflowWrap="break-word"
+                        overflow="hidden"
                     >
-                        Splash
-                    </Text>
-                   
+                        <Image
+                            boxSize={14}
+                            objectFit="cover"
+                            src="/assets/splash.png"
+                        />
+                        <Text fontSize="2xl" fontWeight="bold">
+                            Splash
+                        </Text>
+                    </Flex>
 
                     <IconButton
                         icon={
                             <Icon
                                 as={FiChevronsLeft}
-                                transform={`rotate(${open ? "0deg" : "180deg"
-                                    })`}
+                                transform={`rotate(${
+                                    open ? "0deg" : "180deg"
+                                })`}
                                 transition="opacity 0.2s ease-in, transform 0.2s ease-in"
                             />
                         }

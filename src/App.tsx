@@ -21,8 +21,6 @@ const App: FC = () => {
                 <Route path={AppRoute.Test} element={<Test />} />
                 <Route path={AppRoute.Explore} element={<Explore />} />
                 <Route path={AppRoute.Following} element={<Following />} />
-                <Route path={AppRoute.Signin} element={<Signin />} />
-                <Route path={AppRoute.Signup} element={<Signup />} />
             </Route>
             <Route path="*" element={<Error />} />
         </Routes>
