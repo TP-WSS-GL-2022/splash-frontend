@@ -2,8 +2,17 @@ import { Dispatch, SetStateAction } from "react";
 import * as Yup from "yup";
 
 import {
-    Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Tab, TabList,
-    TabPanel, TabPanels, Tabs
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalHeader,
+    ModalOverlay,
+    Tab,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs,
 } from "@chakra-ui/react";
 
 import { SplashLogo } from "../../../../components/SplashLogo";
@@ -23,6 +32,8 @@ const AuthModal = ({ state, setState }: AuthModalProps) => {
 
     return (
         <Modal
+            closeOnEsc
+            preserveScrollBarGap
             isOpen={state.isOpen}
             onClose={() => setState({ ...state, isOpen: false })}
         >

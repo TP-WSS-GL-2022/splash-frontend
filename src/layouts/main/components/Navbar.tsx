@@ -25,12 +25,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { AuthModal } from "./modal";
 import Sidebar from "./Sidebar";
 import { auth } from "../../../util/firebase";
+import { signOut } from "firebase/auth";
 
 const Navbar: FC = () => {
     const { isOpen: drawerIsOpen, onToggle: toggleDrawer } = useDisclosure();
     const [modalState, setModalState] = useState({ index: 0, isOpen: false });
     const [user, loading, error] = useAuthState(auth);
-    const navigate = useNavigate();
     return (
         <>
             <Flex
@@ -94,7 +94,9 @@ const Navbar: FC = () => {
                                     <MenuItem>Link 1</MenuItem>
                                     <MenuItem>Link 2</MenuItem>
                                     <MenuDivider />
-                                    <MenuItem>Link 3</MenuItem>
+                                    <MenuItem onClick={() => signOut(auth)}>
+                                        Sign out
+                                    </MenuItem>
                                 </MenuList>
                             </Menu>
                         </>
@@ -122,20 +124,21 @@ const Navbar: FC = () => {
                         </>
                     )}
                 </HStack>
+                <AuthModal state={modalState} setState={setModalState} />
+                <Drawer
+                    preserveScrollBarGap
+                    autoFocus={false}
+                    isOpen={drawerIsOpen}
+                    placement="left"
+                    onClose={toggleDrawer}
+                    returnFocusOnClose={false}
+                    onOverlayClick={toggleDrawer}
+                >
+                    <DrawerContent>
+                        <Sidebar open={drawerIsOpen} toggle={toggleDrawer} />
+                    </DrawerContent>
+                </Drawer>
             </Flex>
-            <AuthModal state={modalState} setState={setModalState} />
-            <Drawer
-                autoFocus={false}
-                isOpen={drawerIsOpen}
-                placement="left"
-                onClose={toggleDrawer}
-                returnFocusOnClose={false}
-                onOverlayClick={toggleDrawer}
-            >
-                <DrawerContent>
-                    <Sidebar open={drawerIsOpen} toggle={toggleDrawer} />
-                </DrawerContent>
-            </Drawer>
         </>
     );
 };

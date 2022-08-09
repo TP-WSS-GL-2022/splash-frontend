@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import Particles from "react-tsparticles";
 import { 
         Button,
         Flex,
@@ -10,15 +10,20 @@ import {
         Text,
         useBreakpointValue, 
         } from '@chakra-ui/react';
+import { SplashLogo } from "public/assets/splash.png";
 
 const Landing: FC = () => {
     const navigate = useNavigate();
+    
     return (
         <div>
             <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
-            <Flex p={6} flex={1} align={'center'} m={[2,9]}>
+            <Flex p={8} flex={1}  align={'center'} justify={'center'}>
                 <Stack spacing={6} w={'full'} maxW={'lg'}>
                 <Heading fontSize={{ base: '3xl', sm: '4xl', md: '9xl' }}>
+                    <Text fontSize={{ md: '4xl', lg: '5xl' }} color={'white'} as={'sub'}>
+                        WELCOME TO
+                    </Text>{' '}
                     <Text
                     as={'span'}
                     position={'relative'}
@@ -32,27 +37,30 @@ const Landing: FC = () => {
                         bg: 'blue.400',
                         zIndex: -1,
                     }}>
-                    splash
+                        Splash
                     </Text>
+                    
                     <br />{' '}
+                    <Text fontSize={{ md: '2xl', lg: '3xl' }} color={'white'} >
+                        Live streaming video platform
+                    </Text>{' '}
                 </Heading>
                 <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-                        Live streaming video platform
+                Uses can stream their screen and/or webcam in real-time from a streaming service like OBS, 
+                It will be accompanied with a live text in which viewers can send messages.
                 </Text>
                 <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-                    <Button rounded={'full'} onClick={() => navigate("/home")}>Go to Home</Button>
+                    <Button backgroundColor={'#6E91AD'} rounded={'full'} onClick={() => navigate("/home")}>Go to Home</Button>
                 </Stack>
                 </Stack>
             </Flex>
-            {/* <Flex flex={1}>
+            <Flex flex={1}>
                 <Image
                 alt={'Login Image'}
                 objectFit={'cover'}
-                src={
-                    'https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-                }
+                src="/assets/splash.png"
                 />
-            </Flex> */}
+            </Flex>
             </Stack>
 
         </div>
