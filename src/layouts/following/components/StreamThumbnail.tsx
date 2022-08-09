@@ -20,6 +20,7 @@ const StreamThumbnail: FC = () => {
             // use tab key and remove if needed
             tabIndex={0}
             maxW="inherit"
+            minW="72"
             bgColor="gray.800"
             borderWidth="thin"
             borderColor="gray.700"
