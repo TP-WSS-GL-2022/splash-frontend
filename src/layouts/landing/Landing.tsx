@@ -1,16 +1,22 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Particles from "react-tsparticles";
+
 import { 
         Button,
         Flex,
         Heading,
         Image,
         Stack,
+        Divider,
+        Box,
+        Link,
+        Wrap,
+        WrapItem,
         Text,
         useBreakpointValue, 
         } from '@chakra-ui/react';
-import { SplashLogo } from "public/assets/splash.png";
+import FlexView from "react-flexview"
 
 const Landing: FC = () => {
     const navigate = useNavigate();
@@ -63,6 +69,128 @@ const Landing: FC = () => {
             </Flex>
             </Stack>
 
+            {/* Bottom half of Landing Page */}
+            <Divider marginTop="5" />
+
+            <FlexView height={600} hAlignContent='center' vAlignContent='center' marginTop='5%'>
+                <FlexView height={600} column>
+                    <div style={{ 
+                        width: 150, 
+                        height: 300,
+                        }}>
+                        <Text fontSize={{ 
+                            base: 'md', lg: 'lg' }} 
+                            color={'white.500'} >
+                            Splash
+                        </Text>{' '}
+                    </div>
+                    <div style={{ 
+                        width: 150, 
+                        height:300,
+                        }}>
+                        <Text fontSize={{ 
+                            base: 'md', lg: 'lg' }} 
+                            color={'white.500'} >
+                            Splash
+                        </Text>{' '}
+                    </div>
+                </FlexView>
+                <FlexView>
+                    <div style={{ 
+                        width: 250, 
+                        height:600, 
+                        backgroundColor: '#1A91EB' }}>
+                        
+                    </div>
+                </FlexView>
+                <FlexView height={610} column marginLeft={150}>
+                    <div style={{ 
+                        width: 400, 
+                        height: 305,
+                        }}>
+
+                        <Heading as="h2">
+                                What is Splash about?
+                        </Heading>
+                        <Text fontSize={{ 
+                            base: 'md', lg: 'lg' }} 
+                            color={'gray.500'} >
+                            Splash will be a live-streaming web app. 
+                            Users can stream their screen and/or a webcam in real-time from a streaming service such as OBS. 
+                            It will be paired with a live text chat for viewers to send messages in. 
+                            Users may follow streamers and receive notifications whenever they go live. 
+                            Stream viewers can accumulate channel points for watching streams and claim them for special rewards. 
+                            {/* We might implement a payment system for users (viewers) to subscribe to other users (streamers) using Stripe API or by cryptocurrency (using a test network). */}
+                        </Text>{' '}
+                    </div>
+                    <div style={{ 
+                        width: 400, 
+                        height: 305, 
+                        }}>
+
+                        <Heading as="h2" style={{ marginTop: 30 }}>
+                            Technologies used
+                        </Heading>
+
+                        <Text fontSize={{ 
+                            base: 'md', lg: 'lg' }} 
+                            color={'gray.500'} >
+
+                                <FlexView>
+                                    <div style={{ width: 200, height: 200}}>
+                                        <Text fontSize={{ md: '2xl', lg: '3xl' }}
+                                            color={'gray.400'} >
+                                                Front-end
+                                        </Text>
+                                        <Text fontSize={{ 
+                                            base: 'md', lg: 'lg' }} 
+                                            color={'gray.500'} >
+                                            - React (Typescript) 
+                                        </Text>{' '}
+                                        <Text fontSize={{ 
+                                            base: 'md', lg: 'lg' }} 
+                                            color={'gray.500'} >
+                                            - Chakra 
+                                        </Text>{' '}
+                                        <Text fontSize={{ 
+                                            base: 'md', lg: 'lg' }} 
+                                            color={'gray.500'} >
+                                            - Firebase authentication
+                                        </Text>{' '}
+                                    </div> 
+
+                                    <div style={{ width: 200, height: 200, marginRight: '0px'}}>
+                                        <Text fontSize={{ md: '2xl', lg: '3xl' }}
+                                            color={'gray.400'} >
+                                                Back-end
+                                        </Text>
+                                        <Text fontSize={{ 
+                                            base: 'md', lg: 'lg' }} 
+                                            color={'gray.500'} >
+                                            - Node-Media-Server
+                                        </Text>{' '}
+                                        <Text fontSize={{ 
+                                            base: 'md', lg: 'lg' }} 
+                                            color={'gray.500'} >
+                                            - Express
+                                        </Text>{' '}
+                                        <Text fontSize={{ 
+                                            base: 'md', lg: 'lg' }} 
+                                            color={'gray.500'} >
+                                            - Node
+                                        </Text>{' '}
+                                        <Text fontSize={{ 
+                                            base: 'md', lg: 'lg' }} 
+                                            color={'gray.500'} >
+                                            - Firebase Firestore
+                                        </Text>{' '}
+                                    </div> 
+                                </FlexView>
+                        </Text>{' '}
+
+                    </div>
+                </FlexView>
+            </FlexView>
         </div>
     );
 };
