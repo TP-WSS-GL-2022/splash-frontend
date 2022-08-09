@@ -1,8 +1,18 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import { AspectRatio, Avatar, Box, Heading, HStack, Image, Text, VStack } from '@chakra-ui/react';
+import {
+    AspectRatio,
+    Avatar,
+    Badge,
+    Box,
+    Heading,
+    HStack,
+    Image,
+    Text,
+    VStack,
+} from "@chakra-ui/react";
 
-import placeholderStream from './placeholder_stream.jpg';
+import placeholderStream from "./stream_placeholder.jpg";
 
 const StreamThumbnail: FC = () => {
     return (
@@ -15,12 +25,14 @@ const StreamThumbnail: FC = () => {
             borderColor="gray.700"
             transition="all 0.2s"
             cursor="pointer"
+            pos="relative"
             _hover={{
                 transform: "scale(1.02)",
                 borderColor: "gray.600",
                 bgColor: "gray.700",
             }}
         >
+            <LiveIndicator />
             <AspectRatio ratio={16 / 10}>
                 <Image
                     draggable={false}
@@ -46,6 +58,25 @@ const StreamThumbnail: FC = () => {
                 </HStack>
             </Box>
         </Box>
+    );
+};
+
+const LiveIndicator: FC = () => {
+    return (
+        <Badge
+            px="2"
+            pos="absolute"
+            left="4"
+            top="4"
+            zIndex={1}
+            bgColor="red.400"
+            fontSize="0.9rem"
+            borderWidth="1px"
+            borderColor="red.300"
+            borderRadius="6"
+        >
+            LIVE
+        </Badge>
     );
 };
 
