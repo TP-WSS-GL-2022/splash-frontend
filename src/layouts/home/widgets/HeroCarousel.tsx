@@ -3,16 +3,17 @@ import {
     Flex,
     HStack,
     IconButton,
+    Image,
     useBreakpointValue,
 } from "@chakra-ui/react";
-import React, { FC, useRef } from "react";
+import React, { FC, useMemo, useRef } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import {
     ResponsiveContainer,
     ResponsiveContainerProps,
     StackedCarousel,
+    StackedCarouselSlideProps,
 } from "react-stacked-center-carousel";
-import { SlidableCard } from "./SlidableCard";
 
 export const data = [
     {
@@ -57,7 +58,7 @@ export const data = [
     },
 ];
 
-const HeroCarousel: FC = props => {
+const HeroCarousel: FC<{}> = () => {
     const ref = useRef<StackedCarousel>();
     // TODO: consider if needed
     // const slideWidth = useBreakpointValue(
@@ -121,7 +122,7 @@ const HeroCarousel: FC = props => {
                             data={data}
                             carouselWidth={parentWidth}
                             slideWidth={600}
-                            slideComponent={SlidableCard}
+                            slideComponent={CarouselCard}
                             maxVisibleSlide={5}
                             currentVisibleSlide={currentVisibleSlide}
                             customScales={[1, 0.8, 0.7, 0.2]}
@@ -134,5 +135,29 @@ const HeroCarousel: FC = props => {
         </Box>
     );
 };
+
+export const CarouselCard: FC<StackedCarouselSlideProps> = props => {
+    const { data, dataIndex } = props;
+    const { cover } = data[dataIndex];
+
+    const memoized = useMemo(() => {
+        return (
+            <Box w="full" userSelect="none">
+                <Image
+                    w="full"
+                    h="full"
+                    src={cover}
+                    draggable={false}
+                    fit="cover"
+                    borderRadius="xl"
+                    boxShadow="dark-xl"
+                />
+            </Box>
+        );
+    }, []);
+
+    return memoized;
+};
+
 
 export default HeroCarousel;
