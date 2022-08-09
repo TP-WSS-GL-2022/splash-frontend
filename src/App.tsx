@@ -11,6 +11,7 @@ import {
     Test,
 } from "./layouts";
 import { AppRoute } from "./util/routes";
+import "./util/util.css";
 
 const App: FC = () => {
     return (
