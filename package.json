@@ -20,6 +20,7 @@
     "react-firebase-hooks": "^5.0.3",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
+    "react-stacked-center-carousel": "^1.0.12",
     "uuid": "^8.3.2",
     "yup": "^0.32.11"
   },
