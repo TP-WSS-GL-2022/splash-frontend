@@ -8,6 +8,8 @@ import {
     Home,
     Landing,
     MainLayout,
+    Profile,
+    Settings,
     Test,
 } from "./layouts";
 import { AppRoute } from "./util/routes";
@@ -23,6 +25,8 @@ const App: FC = () => {
                 <Route path={AppRoute.Explore} element={<Explore />} />
                 <Route path={AppRoute.Following} element={<Following />} />
             </Route>
+            <Route path={AppRoute.Profile} element={<Profile />} />
+            <Route path={AppRoute.Settings} element={<Settings />} />
             <Route path="*" element={<Error />} />
         </Routes>
     );

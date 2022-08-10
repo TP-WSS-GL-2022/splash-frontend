@@ -6,4 +6,6 @@ export enum AppRoute {
     Following = "/home/following",
     Signin = "/home/signin",
     Signup = "/home/signup",
+    Profile = "/profile",
+    Settings = "/profile/settings",
 }

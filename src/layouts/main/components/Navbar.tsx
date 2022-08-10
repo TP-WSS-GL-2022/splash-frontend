@@ -31,6 +31,7 @@ const Navbar: FC = () => {
     const { isOpen: drawerIsOpen, onToggle: toggleDrawer } = useDisclosure();
     const [modalState, setModalState] = useState({ index: 0, isOpen: false });
     const [user, loading, error] = useAuthState(auth);
+    const navigate = useNavigate();
     return (
         <>
             <Flex
@@ -91,8 +92,8 @@ const Navbar: FC = () => {
                                     />
                                 </MenuButton>
                                 <MenuList>
-                                    <MenuItem>Link 1</MenuItem>
-                                    <MenuItem>Link 2</MenuItem>
+                                    <MenuItem onClick={() => navigate("/profile")}>Profile</MenuItem>
+                                    <MenuItem onClick={() => navigate("/profile/settings")}>Settings</MenuItem>
                                     <MenuDivider />
                                     <MenuItem onClick={() => signOut(auth)}>
                                         Sign out
