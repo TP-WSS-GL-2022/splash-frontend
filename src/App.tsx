@@ -25,8 +25,11 @@ const App: FC = () => {
                 <Route path={AppRoute.Explore} element={<Explore />} />
                 <Route path={AppRoute.Following} element={<Following />} />
             </Route>
-            <Route path={AppRoute.Profile} element={<Profile />} />
-            <Route path={AppRoute.Settings} element={<Settings />} />
+            <Route path={AppRoute.Profile} element={<MainLayout />}>
+                <Route index element={<Profile />} />
+                <Route path={AppRoute.Settings} element={<Settings />} />
+            </Route>
+            
             <Route path="*" element={<Error />} />
         </Routes>
     );

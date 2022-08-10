@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Particles from "react-tsparticles";
-import { loadSeaAnemonePreset } from "tsparticles-preset-sea-anemone";
 
 import FlexView from "react-flexview"
 
