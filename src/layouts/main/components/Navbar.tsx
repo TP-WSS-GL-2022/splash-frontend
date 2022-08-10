@@ -26,6 +26,7 @@ import { AuthModal } from "./modal";
 import Sidebar from "./Sidebar";
 import { auth } from "../../../util/firebase";
 import { signOut } from "firebase/auth";
+import { AppRoute } from "../../../util/routes";
 
 const Navbar: FC = () => {
     const { isOpen: drawerIsOpen, onToggle: toggleDrawer } = useDisclosure();
@@ -92,8 +93,8 @@ const Navbar: FC = () => {
                                     />
                                 </MenuButton>
                                 <MenuList>
-                                    <MenuItem onClick={() => navigate("/profile")}>Profile</MenuItem>
-                                    <MenuItem onClick={() => navigate("/profile/settings")}>Settings</MenuItem>
+                                    <MenuItem onClick={() => navigate(AppRoute.Profile)}>Profile</MenuItem>
+                                    <MenuItem onClick={() => navigate(AppRoute.Settings)}>Settings</MenuItem>
                                     <MenuDivider />
                                     <MenuItem onClick={() => signOut(auth)}>
                                         Sign out
