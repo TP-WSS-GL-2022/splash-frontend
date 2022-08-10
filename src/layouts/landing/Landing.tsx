@@ -1,6 +1,9 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Particles from "react-tsparticles";
+import { loadSeaAnemonePreset } from "tsparticles-preset-sea-anemone";
+
+import FlexView from "react-flexview"
 
 import { 
         Button,
@@ -9,18 +12,14 @@ import {
         Image,
         Stack,
         Divider,
-        Box,
-        Link,
-        Wrap,
-        WrapItem,
         Text,
         useBreakpointValue, 
         } from '@chakra-ui/react';
-import FlexView from "react-flexview"
 
 const Landing: FC = () => {
     const navigate = useNavigate();
-    
+
+      
     return (
         <div>
             <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
@@ -96,11 +95,14 @@ const Landing: FC = () => {
                     </div>
                 </FlexView>
                 <FlexView>
+                    {/* Particles API */}
+                    
+                
                     <div style={{ 
                         width: 250, 
                         height:600, 
                         backgroundColor: '#1A91EB' }}>
-                        
+                             
                     </div>
                 </FlexView>
                 <FlexView height={610} column marginLeft={150}>
