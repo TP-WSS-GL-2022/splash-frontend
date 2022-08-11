@@ -1,7 +1,7 @@
-import FlvJs from "flv.js"
-import { useEffect, useRef, useState } from "react"
+import FlvJs from "flv.js";
+import { useEffect, useRef, useState } from "react";
 
-import { chakra, Image, usePrevious } from "@chakra-ui/react"
+import { chakra, Image, usePrevious } from "@chakra-ui/react";
 
 const FlvPlayer = ({
     userId,
@@ -100,7 +100,7 @@ const FlvPlayer = ({
                 player.destroy();
             } catch {}
         };
-    }, [userId, videoRef]);
+    }, [userId, secret, videoRef]);
 
     return isStreaming ? (
         <chakra.video
