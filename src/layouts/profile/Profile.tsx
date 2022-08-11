@@ -1,8 +1,7 @@
-import { FC } from "react";
-import { Heading, SimpleGrid, Center, Box, Container } from "@chakra-ui/react";
-import UserProfileCard from "./components/UserProfileCard";
-import StreamThumbnail from "../following/components/StreamThumbnail";
-import { UserProvider } from "../../context/UserContext";
+import { Box, Container, Heading, SimpleGrid } from "@chakra-ui/react"
+import { FC } from "react"
+import StreamThumbnail from "../../components/StreamThumbnail"
+import UserProfileCard from "./components/UserProfileCard"
 const Profile: FC = () => {
     return (
         <Container centerContent maxW="container.xl">

@@ -1,8 +1,6 @@
-import { FC } from "react";
+import { FC } from "react"
 
-import { AspectRatio, Box, Image, Heading } from "@chakra-ui/react";
-
-import categoryPlaceholder from "./category_placeholder.jpg";
+import { Box, Heading } from "@chakra-ui/react"
 
 const CategoryThumbnail: FC = () => {
     return (
@@ -23,7 +21,7 @@ const CategoryThumbnail: FC = () => {
             __css={{
                 backgroundImage: `
                     linear-gradient(to top, rgba(0,0,0) 0%, rgba(0,0,0,0.0) 50%),
-                    url(${categoryPlaceholder})
+                    url(/assets/category_placeholder.jpg)
                 `,
             }}
             _hover={{

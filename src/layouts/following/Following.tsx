@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC } from 'react'
 
-import { Box, Divider, Heading, SimpleGrid } from '@chakra-ui/react';
+import { Box, Divider, Heading, SimpleGrid } from '@chakra-ui/react'
 
-import StreamThumbnail from './components/StreamThumbnail';
+import StreamThumbnail from '../../components/StreamThumbnail'
 
 const Following: FC = () => {
     return (

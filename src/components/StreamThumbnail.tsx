@@ -1,20 +1,11 @@
-import { FC } from "react";
+import { FC } from "react"
+import { useNavigate } from "react-router-dom"
 
 import {
-    AspectRatio,
-    Avatar,
-    Badge,
-    Box,
-    Heading,
-    HStack,
-    Image,
-    Text,
-    VStack,
-} from "@chakra-ui/react";
+    AspectRatio, Avatar, Badge, Box, Heading, HStack, Image, Text, VStack
+} from "@chakra-ui/react"
 
-import placeholderStream from "./stream_placeholder.jpg";
-import { useNavigate } from "react-router-dom";
-import { AppRoute } from "../../../util/routes";
+import { AppRoute } from "../util/routes"
 
 const StreamThumbnail: FC = () => {
     const navigate = useNavigate();
@@ -23,7 +14,7 @@ const StreamThumbnail: FC = () => {
         <Box
             // use tab key and remove if needed
             tabIndex={0}
-            maxW="inherit"
+            w="72"
             minW="72"
             bgColor="gray.800"
             borderWidth="thin"
@@ -42,7 +33,7 @@ const StreamThumbnail: FC = () => {
             <AspectRatio ratio={16 / 10}>
                 <Image
                     draggable={false}
-                    src={placeholderStream}
+                    src="/assets/stream_placeholder.jpg"
                     w="100%"
                     alt="Video Thumbnail here"
                 />
