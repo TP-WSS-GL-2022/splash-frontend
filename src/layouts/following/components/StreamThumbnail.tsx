@@ -13,8 +13,12 @@ import {
 } from "@chakra-ui/react";
 
 import placeholderStream from "./stream_placeholder.jpg";
+import { useNavigate } from "react-router-dom";
+import { AppRoute } from "../../../util/routes";
 
 const StreamThumbnail: FC = () => {
+    const navigate = useNavigate();
+
     return (
         <Box
             // use tab key and remove if needed
@@ -32,6 +36,7 @@ const StreamThumbnail: FC = () => {
                 borderColor: "gray.600",
                 bgColor: "gray.700",
             }}
+            onClick={() => navigate(`${AppRoute.Live}/johndoe`)}
         >
             <LiveIndicator />
             <AspectRatio ratio={16 / 10}>

@@ -4,6 +4,7 @@ export enum AppRoute {
     Test = "/home/test",
     Explore = "/home/explore",
     Following = "/home/following",
+    Live = "/home/live",
     Signin = "/home/signin",
     Signup = "/home/signup",
     Profile = "/profile",

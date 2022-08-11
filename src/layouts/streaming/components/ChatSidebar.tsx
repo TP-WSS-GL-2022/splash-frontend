@@ -1,6 +1,17 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren } from "react";
 
-import { Button, Flex, Highlight, Input, Spacer, Text, VStack } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    Flex,
+    Highlight,
+    Input,
+    Spacer,
+    Text,
+    VStack,
+    Wrap,
+    WrapItem,
+} from "@chakra-ui/react";
 
 export interface ChatMessageProps {
     // author: User ??
@@ -11,7 +22,7 @@ export const ChatMessage: FC<PropsWithChildren<ChatMessageProps>> = props => {
     const { authorName, children: message } = props;
 
     return (
-        <Text color="white" textAlign="start" fontSize="sm">
+        <Text mt="1" color="white" textAlign="start" fontSize="sm">
             <Highlight
                 query={authorName}
                 styles={{ fontWeight: "semibold", textColor: "cyan.400" }}
@@ -23,26 +34,37 @@ export const ChatMessage: FC<PropsWithChildren<ChatMessageProps>> = props => {
     );
 };
 
-const ChatSidebar: FC = () => {
+const messages = Array(40).fill(null);
+
+const ChatSidebar: FC<{}> = () => {
     return (
         <Flex
+            w="80"
+            justify="space-between"
             direction="column"
-            p="4"
-            h="full"
-            w="22rem"
-            right="0"
-            borderLeft="1px"
+            borderLeftWidth="thin"
             borderLeftColor="gray.700"
         >
-            <VStack align="start" overflowY="scroll">
-                <ChatMessage authorName="shockch4rge">Hello world!</ChatMessage>
-                <ChatMessage authorName="fucker123">Deez nuts</ChatMessage>
-                <ChatMessage authorName="isuckzechballs">
-                    His balls are delicious!
-                </ChatMessage>
+            <VStack
+                px="4"
+                pb="4"
+                h="full"
+                align="start"
+                maxH="2xl"
+                overflowY="scroll"
+            >
+                {messages.map(_ => (
+                    <ChatMessage authorName="johndoe" key={Math.random()}>
+                        Hello world!
+                    </ChatMessage>
+                ))}
             </VStack>
-            <Spacer />
-            <VStack align="end">
+            <VStack
+                p="4"
+                align="end"
+                borderTopWidth="thin"
+                borderTopColor="gray.700"
+            >
                 <Input
                     bg="gray.800"
                     borderColor="gray.700"

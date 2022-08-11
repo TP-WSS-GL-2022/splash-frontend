@@ -11,6 +11,7 @@ import {
     MainLayout,
     Profile,
     Settings,
+    Streaming,
     Test,
 } from "./layouts";
 import { AppRoute } from "./util/routes";
@@ -26,6 +27,7 @@ const App: FC = () => {
                     <Route path={AppRoute.Test} element={<Test />} />
                     <Route path={AppRoute.Explore} element={<Explore />} />
                     <Route path={AppRoute.Following} element={<Following />} />
+                    <Route path={`${AppRoute.Live}/:username`} element={<Streaming />} />
                 </Route>
                 <Route path={AppRoute.Profile} element={<MainLayout />}>
                     <Route index element={<Profile />} />

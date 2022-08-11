@@ -7,3 +7,4 @@ export { default as Landing } from "./landing/Landing";
 export { default as Profile } from "./profile/Profile";
 export { default as Settings } from "./settings/Settings";
 export { default as Error } from "./error/Error";
+export { default as Streaming } from "./streaming/Streaming";
