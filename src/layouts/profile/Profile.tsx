@@ -1,25 +1,25 @@
 import { FC } from "react";
-import { Heading, SimpleGrid, Center } from "@chakra-ui/react";
+import { Heading, SimpleGrid, Center, Box, Container } from "@chakra-ui/react";
 import UserProfileCard from "./components/UserProfileCard";
 import StreamThumbnail from "../following/components/StreamThumbnail";
 import { UserProvider } from "../../context/UserContext";
 const Profile: FC = () => {
     return (
-        <UserProvider>
-            <Center>
-                <SimpleGrid w={"50%"} flexWrap="wrap">
-                    <UserProfileCard />
+        <Container centerContent maxW="container.xl">
+            <SimpleGrid w="50%" flexWrap="wrap">
+                <UserProfileCard />
+                <Box mt="12">
                     <Heading>Past Broadcast</Heading>
-                    <SimpleGrid minChildWidth="72" spacing="4">
+                    <SimpleGrid mt="4   " minChildWidth="72" spacing="4">
                         <StreamThumbnail />
                         <StreamThumbnail />
                         <StreamThumbnail />
                         <StreamThumbnail />
                         <StreamThumbnail />
                     </SimpleGrid>
-                </SimpleGrid>
-            </Center>
-        </UserProvider>
+                </Box>
+            </SimpleGrid>
+        </Container>
     );
 };
 
