@@ -28,11 +28,9 @@ const theme = extendTheme(themeConfig);
 localStorage.setItem("chakra-ui-color-mode", "dark");
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
-        <ChakraProvider theme={theme}>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </ChakraProvider>
-    </React.StrictMode>
+    <ChakraProvider theme={theme}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </ChakraProvider>
 );
