@@ -1,7 +1,5 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Particles from "react-tsparticles";
-
 import FlexView from "react-flexview"
 
 import { 
@@ -13,6 +11,8 @@ import {
         Divider,
         Text,
         useBreakpointValue, 
+        AspectRatio,
+        Box,
         } from '@chakra-ui/react';
 
 const Landing: FC = () => {
@@ -98,13 +98,38 @@ const Landing: FC = () => {
                     
                 
                     <div style={{ 
-                        width: 250, 
+                        width: 400, 
                         height:600, 
-                        backgroundColor: '#1A91EB' }}>
+                        }}>
+
+                        <Box
+                            tabIndex={0}
+                            maxW="inherit"
+                            minW="72"
+                            bgColor="gray.800"
+                            transition="all 0.2s"
+                            cursor="pointer"
+                            pos="relative"
+                            _hover={{
+                                transform: "scale(1.02)",
+                                borderColor: "gray.600",
+                                bgColor: "gray.700",
+                            }}
+                        >
+                                
+                            <AspectRatio ratio={7 / 10}>
+                                <Image
+                                    draggable={false}
+                                    src={'/assets/character.png'}
+                                    w="100%"
+                                    alt="Video Thumbnail here"
+                                />
+                            </AspectRatio>
+                        </Box>
                              
                     </div>
                 </FlexView>
-                <FlexView height={610} column marginLeft={150}>
+                <FlexView height={610} column marginLeft={80}>
                     <div style={{ 
                         width: 400, 
                         height: 305,
