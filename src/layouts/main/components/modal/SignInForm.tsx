@@ -1,5 +1,9 @@
 import {
-    AuthError, AuthErrorCodes, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup
+    AuthError,
+    AuthErrorCodes,
+    GoogleAuthProvider,
+    signInWithEmailAndPassword,
+    signInWithPopup,
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Field, Form, Formik, FormikHelpers } from "formik";
@@ -10,8 +14,24 @@ import { v4 as uuidv4 } from "uuid";
 import * as Yup from "yup";
 
 import {
-    Alert, AlertIcon, AlertTitle, Box, Button, Center, Checkbox, Divider, Flex, FormControl,
-    FormErrorMessage, FormLabel, Input, InputGroup, InputRightElement, Stack, Text, VStack
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    Box,
+    Button,
+    Center,
+    Checkbox,
+    Divider,
+    Flex,
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+    Input,
+    InputGroup,
+    InputRightElement,
+    Stack,
+    Text,
+    VStack,
 } from "@chakra-ui/react";
 
 import { AuthErrorCode, AuthErrorResponse } from "../../../../util/errors";
@@ -57,6 +77,7 @@ const SignInForm = ({ onClose }: SignInFormProps) => {
             formData.email,
             formData.password
         ).catch((e: AuthError) => handleAuthError(e));
+        onClose();
     }, []);
 
     const handleGoogle = useCallback(async () => {
