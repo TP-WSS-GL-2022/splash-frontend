@@ -1,10 +1,6 @@
-import {
-    collection,
-    CollectionReference,
-    DocumentReference,
-} from "firebase/firestore";
-import { createContext } from "react";
-import { fs } from "../util/firebase";
+import { collection, CollectionReference, DocumentReference } from "firebase/firestore"
+
+import { fs } from "../util/firebase"
 
 export interface SocialPlatforms {
     instagram?: string;
@@ -14,7 +10,7 @@ export interface SocialPlatforms {
 }
 
 export interface User {
-    id: DocumentReference<User>;
+    ref: DocumentReference<User>;
     username: string;
     photo?: string;
     followerCount: number;

@@ -1,15 +1,9 @@
-import { doc, getDoc } from "firebase/firestore";
-import {
-    createContext,
-    FC,
-    PropsWithChildren,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
-import { User } from "../models";
-import { Users } from "../models/User";
-import { auth } from "../util/firebase";
+import { doc, getDoc } from "firebase/firestore"
+import { createContext, FC, PropsWithChildren, useEffect, useState } from "react"
+
+import { User } from "../models"
+import { Users } from "../models/User"
+import { auth } from "../util/firebase"
 
 export const UserContext = createContext<User | null>(null);
 
@@ -25,7 +19,10 @@ export const UserProvider: FC<PropsWithChildren<{}>> = props => {
             }
 
             const snap = await getDoc(doc(Users, authUser.uid));
-            setUser(snap.data()!);
+            setUser({
+                ...snap.data()!,
+                ref: snap.ref,
+            });
         });
 
         return unsubscribe;
