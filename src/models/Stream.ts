@@ -1,13 +1,12 @@
 import {
     collection,
     CollectionReference,
-    DocumentReference,
-} from "firebase/firestore";
-import { fs } from "../util/firebase";
-import { User } from "./User";
+    DocumentReference
+} from "firebase/firestore"
+import { fs } from "../util/firebase"
+import { User } from "./User"
 
 export interface Stream {
-    id: DocumentReference<Stream>;
     title: string;
     categories: string[];
     startedAt?: Date;
