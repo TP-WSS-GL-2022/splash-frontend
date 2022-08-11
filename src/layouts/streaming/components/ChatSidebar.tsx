@@ -1,17 +1,12 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from "react"
 
 import {
-    Box,
     Button,
     Flex,
     Highlight,
-    Input,
-    Spacer,
-    Text,
-    VStack,
-    Wrap,
-    WrapItem,
-} from "@chakra-ui/react";
+    Input, Text,
+    VStack
+} from "@chakra-ui/react"
 
 export interface ChatMessageProps {
     // author: User ??
@@ -40,7 +35,6 @@ const ChatSidebar: FC<{}> = () => {
     return (
         <Flex
             w="80"
-            justify="space-between"
             direction="column"
             borderLeftWidth="thin"
             borderLeftColor="gray.700"
@@ -48,9 +42,7 @@ const ChatSidebar: FC<{}> = () => {
             <VStack
                 px="4"
                 pb="4"
-                h="full"
                 align="start"
-                maxH="2xl"
                 overflowY="scroll"
             >
                 {messages.map(_ => (
