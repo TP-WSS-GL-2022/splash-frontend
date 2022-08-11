@@ -3,6 +3,7 @@ import {
     CollectionReference,
     DocumentReference,
 } from "firebase/firestore";
+import { createContext } from "react";
 import { fs } from "../util/firebase";
 
 export interface SocialPlatforms {
@@ -23,3 +24,4 @@ export interface User {
 }
 
 export const Users = collection(fs, "users") as CollectionReference<User>;
+export const UserContext = createContext<User | null>(null);

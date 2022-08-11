@@ -1,50 +1,57 @@
-import React from 'react'
-import { Box, Avatar, Center, VStack, Heading, Text, Button, useMediaQuery } from '@chakra-ui/react'
+import React, { useContext, useEffect } from "react";
+import {
+    Box,
+    Avatar,
+    Center,
+    VStack,
+    Heading,
+    Button,
+    Text,
+} from "@chakra-ui/react";
+import { auth } from "../../../util/firebase";
+import { UserContext } from "../../../models/User";
 
 const UserProfileCard = () => {
+    const user = useContext(UserContext);
 
-    const [isLargerThan830] = useMediaQuery('(min-width: 830px)')
+    // useEffect(() => {
+    //     console.dir(user);
+    // }, [user]);
+
+    if (!user) return <></>;
 
     return (
         <Box
-            w={"100%"}
+            w="full"
             bgColor="blackAlpha.300"
-            minHeight={80}
-            position={'relative'}
-            mt={2}
-            marginBottom={5}
+            height={80}
+            position={"relative"}
+            mt={6}
+            p={6}
         >
-
+            <Button position={"absolute"} top={5} right={5} colorScheme="teal">
+                Follow
+            </Button>
             <Center>
-                <Avatar
-                    size='2xl'
-                    mt={5}
-                    name="Dan Abramov"
-                    src="https://bit.ly/dan-abramov"
-                />
+                <Avatar size="2xl" name={user.username} src={user.photo} />
             </Center>
-            <VStack align={"center"} paddingBottom={3}>
-                <Heading size={isLargerThan830 ? '2xl' : 'xl'}  >
-                    Dan Abramov
+            <VStack align={"center"}>
+                <Heading mt={4} size="2xl" noOfLines={1} maxW="50%">
+                    {user.username}
                 </Heading>
-                <Text>
-                    2.6k Followers
-                </Text>
-                <Text maxW={'80%'} >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, eius ex? Quos in nam neque dolor a eaque, quam aut dicta quasi nobis aliquid corporis laborum rem explicabo eveniet! Voluptate.
-                </Text>
-                <Button
-                    position={isLargerThan830 ? 'absolute' : 'relative'}
-                    top={isLargerThan830 ? 3 : 0}
-                    right={isLargerThan830 ? 5 : 0}
-                    minWidth={'1rem'}
-                    colorScheme='teal'
+                <Text
+                    fontSize="md"
+                    noOfLines={3}
+                    maxW="50%"
+                    fontWeight={"light"}
                 >
-                    Follow
-                </Button>
+                    {user.bio}
+                </Text>
+
+                <Text>{user.followerCount}</Text>
             </VStack>
         </Box>
-    )
-}
+    );
+};
 
-export default UserProfileCard
+export default UserProfileCard;

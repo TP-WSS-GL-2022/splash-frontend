@@ -61,6 +61,7 @@ const SignUpForm = ({ onClose }: SignInProps) => {
                 photo: null,
                 social: {},
             });
+            
             onClose();
         } catch (e) {
             handleAuthError(e as AuthError);

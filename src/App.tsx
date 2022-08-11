@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
+import { UserProvider } from "./context/UserContext";
 
 import {
     Error,
@@ -12,6 +13,7 @@ import {
     Settings,
     Test,
 } from "./layouts";
+import { UserContext } from "./models/User";
 import { AppRoute } from "./util/routes";
 import "./util/util.css";
 
@@ -29,7 +31,7 @@ const App: FC = () => {
                 <Route index element={<Profile />} />
                 <Route path={AppRoute.Settings} element={<Settings />} />
             </Route>
-            
+
             <Route path="*" element={<Error />} />
         </Routes>
     );
