@@ -1,25 +1,22 @@
-import { FC, PropsWithChildren, useState } from "react";
+import { useState } from "react"
 
-import { ReactFlvPlayer } from "@asurraa/react-ts-flv-player";
-import { Box, HStack, Input } from "@chakra-ui/react";
+import { Box, HStack, Input } from "@chakra-ui/react"
 
-import ChatSidebar from "./components/ChatSidebar";
+import FlvPlayer from "../../components/FlvPlayer"
+import ChatSidebar from "./components/ChatSidebar"
 
-const Test: FC<PropsWithChildren<{}>> = props => {
-    const [name, setName] = useState("");
+const Test = () => {
+    const [userId, setUserId] = useState("");
 
     return (
         <HStack align="space-between">
-            {name !== "" ? (
+            {userId !== "" ? (
                 <Box>
                     <ChatSidebar />
-                    <ReactFlvPlayer
-                        url={`http://18.143.74.14:6969/api/${name}/live.flv`}
-                        isLive={true}
-                    />
+                    <FlvPlayer userId={userId} />
                 </Box>
             ) : (
-                <Input onBlur={e => setName(e.target.value)} />
+                <Input onBlur={e => setUserId(e.target.value)} />
             )}
         </HStack>
     );
