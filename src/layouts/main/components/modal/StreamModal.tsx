@@ -1,9 +1,10 @@
 import { doc, query, Timestamp, updateDoc, where } from "firebase/firestore"
-import { useContext, useState } from "react"
+import { createRef, FocusEvent, useContext, useState } from "react"
 import { useCollection, useDocumentData } from "react-firebase-hooks/firestore"
 
 import {
-    Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay
+    Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader,
+    ModalOverlay
 } from "@chakra-ui/react"
 
 import FlvPlayer from "../../../../components/FlvPlayer"
@@ -18,7 +19,9 @@ const StreamModal = ({
     isOpen: boolean;
     onClose: () => void;
 }) => {
+    const inputRef = createRef<HTMLInputElement>();
     const user = useContext(UserContext);
+
     const key = useDocumentData(doc(Keys, user?.ref.id ?? "-"))[0];
     const streamSnap = useCollection(
         query(
@@ -44,7 +47,23 @@ const StreamModal = ({
                         secret={key?.secret}
                         width="100%"
                         height="300px"
-                        onIsStreamingChange={setIsStreaming}
+                        onIsStreamingChange={isStreaming => {
+                            setIsStreaming(isStreaming);
+                            if (!isStreaming && inputRef.current) {
+                                inputRef.current.value = "";
+                            }
+                        }}
+                    />
+                    <Input
+                        ref={inputRef}
+                        mt={2}
+                        placeholder="Title"
+                        onBlur={(e: FocusEvent<HTMLInputElement>) =>
+                            updateDoc(streamSnap!.ref, {
+                                title: e.target.value,
+                            })
+                        }
+                        isDisabled={!isStreaming}
                     />
                 </ModalBody>
 
@@ -63,7 +82,7 @@ const StreamModal = ({
                                 });
                             }
                         }}
-                        isDisabled={!isStreaming}
+                        isDisabled={!isStreaming || !inputRef.current?.value}
                     >
                         {!!stream?.startedAt ? "Stop" : "Start"} Streaming
                     </Button>
