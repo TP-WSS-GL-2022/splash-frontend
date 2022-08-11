@@ -2,16 +2,13 @@ import {
     Box,
     Container,
     Flex,
-    Heading,
-    HStack,
-    IconButton,
-    VStack,
-} from "@chakra-ui/react";
-import { FC, useRef } from "react";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
-import StreamThumbnail from "../following/components/StreamThumbnail";
-import CategoryThumbnail from "../following/components/CategoryThumbnail";
-import { HeroCarousel } from "./widgets";
+    Heading, IconButton
+} from "@chakra-ui/react"
+import { FC } from "react"
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi"
+import CategoryThumbnail from "../../components/CategoryThumbnail"
+import StreamThumbnail from "../../components/StreamThumbnail"
+import { HeroCarousel } from "./components"
 
 const Home: FC = () => {
     return (
