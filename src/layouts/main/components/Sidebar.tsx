@@ -48,11 +48,6 @@ const sidebarItems = [
         icon: FiStar,
         link: AppRoute.Following,
     },
-    {
-        name: "Test",
-        icon: FiSettings,
-        link: AppRoute.Test,
-    },
 ];
 
 const SidebarItem: FC<SidebarItemProps> = ({

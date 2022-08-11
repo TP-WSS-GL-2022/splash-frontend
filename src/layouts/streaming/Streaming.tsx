@@ -1,4 +1,3 @@
-import { ReactFlvPlayer } from "@asurraa/react-ts-flv-player";
 import { Avatar, Box, Flex, Heading, HStack, VStack } from "@chakra-ui/react";
 import { FC } from "react";
 import ChatSidebar from "./components/ChatSidebar";
@@ -8,12 +7,7 @@ const Streaming: FC<{}> = () => {
         <>
             <Flex h="full">
                 <Flex flex="3" direction="column" overflowY="scroll">
-                    <Box minH="2xl">
-                        <ReactFlvPlayer
-                            url={`http://18.143.74.14:6969/api`}
-                            isLive={true}
-                        />
-                    </Box>
+                    <Box minH="2xl"></Box>
                     <StreamFooter />
                 </Flex>
                 <ChatSidebar />
