@@ -133,6 +133,8 @@ const Home: FC = () => {
                     </IconButton>
                 </Box>
             </Box>
+
+            <Box mt="12"></Box>
         </Container>
     );
 };
