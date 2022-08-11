@@ -83,6 +83,7 @@ const SidebarItem: FC<SidebarItemProps> = ({
                 bg={location.pathname === link ? "teal.200" : "whiteAlpha.200"}
                 color={location.pathname === link ? "black" : "white"}
                 _hover={{ bg: "teal.200", color: "black" }}
+                _active={{ bg: "teal.200", color: "black" }}
                 onClick={() => navigate(link)}
                 overflowWrap="break-word"
                 overflow="hidden"
