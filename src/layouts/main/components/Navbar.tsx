@@ -1,3 +1,4 @@
+import React from "react";
 import { FC, useState } from "react";
 import { FiMenu, FiVideo } from "react-icons/fi";
 
@@ -17,8 +18,20 @@ import {
     MenuItem,
     MenuList,
     Skeleton,
-    Text,
+    Box,
+    Image,
     useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    Center,
+    FormControl,
+    FormLabel,
+    Switch
 } from "@chakra-ui/react";
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -32,6 +45,9 @@ const Navbar: FC = () => {
     const { isOpen: drawerIsOpen, onToggle: toggleDrawer } = useDisclosure();
     const [modalState, setModalState] = useState({ index: 0, isOpen: false });
     const [user, loading, error] = useAuthState(auth);
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [size, setSize] = React.useState('xl')
+    const finalRef = React.useRef(null)
     const navigate = useNavigate();
     return (
         <>
@@ -53,14 +69,12 @@ const Navbar: FC = () => {
                     icon={<FiMenu />}
                 />
 
-                <Text
+                <Image
                     display={{ base: "flex", md: "none" }}
-                    fontSize="2xl"
-                    fontFamily="monospace"
-                    fontWeight="bold"
-                >
-                    Logo
-                </Text>
+                    boxSize={14}
+                    objectFit="cover"
+                    src="/assets/splash.png"
+                />
 
                 <HStack spacing={6}>
                     {loading ? (
@@ -72,11 +86,41 @@ const Navbar: FC = () => {
                                 colorScheme={"teal"}
                                 size={"sm"}
                                 leftIcon={<FiVideo />}
-                                onClick={console.log}
+                                onClick={onOpen}
                                 display={{ base: "none", md: "inline-flex" }}
                             >
                                 Stream
                             </Button>
+                            <Modal finalFocusRef={finalRef} size={size} isOpen={isOpen} onClose={onClose}>
+                                <ModalOverlay />
+                                <ModalContent>
+                                    <Center>
+                                        <ModalHeader>Title</ModalHeader>
+                                    </Center>
+                                    <ModalCloseButton />
+                                    <ModalBody>
+                                        <Image
+                                            draggable={false}
+                                            src={"https://filestore.community.support.microsoft.com/api/images/857d91c4-3174-47e1-ac65-fb319ae97773?upload=true"}
+                                            w="100%"
+                                            h="300"
+                                            alt="Video Thumbnail here"
+                                        />
+                                        <Box mt="5"></Box>
+                                        <FormControl display='flex' alignItems='center'>
+                                            <FormLabel htmlFor='email-alerts' mb='0'>
+                                            <FiVideo />
+                                            </FormLabel>
+                                            <Switch id='email-alerts' />
+                                        </FormControl>
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button colorScheme='teal' mr={3} onClick={console.log}>
+                                            Start Streaming
+                                        </Button>
+                                    </ModalFooter>
+                                </ModalContent>
+                            </Modal>
                             <Menu>
                                 <MenuButton
                                     as={Button}
