@@ -1,53 +1,25 @@
-import React, { useContext } from "react";
-import { FC, useState } from "react";
-import { FiMenu, FiVideo } from "react-icons/fi";
-
-import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth"
+import { FC, useContext, useState } from "react"
+import { FiMenu, FiVideo } from "react-icons/fi"
+import { useNavigate } from "react-router-dom"
 
 import {
-    Avatar,
-    Button,
-    Drawer,
-    DrawerContent,
-    Flex,
-    HStack,
-    IconButton,
-    Menu,
-    MenuButton,
-    MenuDivider,
-    MenuItem,
-    MenuList,
-    Skeleton,
-    Box,
-    Image,
-    useDisclosure,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Center,
-    FormControl,
-    FormLabel,
-    Switch,
-} from "@chakra-ui/react";
+    Avatar, Button, Drawer, DrawerContent, Flex, HStack, IconButton, Image, Menu, MenuButton,
+    MenuDivider, MenuItem, MenuList, useDisclosure
+} from "@chakra-ui/react"
 
-import { useAuthState } from "react-firebase-hooks/auth";
-import { AuthModal } from "./modal";
-import Sidebar from "./Sidebar";
-import { auth } from "../../../util/firebase";
-import { signOut } from "firebase/auth";
-import { AppRoute } from "../../../util/routes";
-import { UserContext } from "../../../context/UserContext";
+import { UserContext } from "../../../context/UserContext"
+import { auth } from "../../../util/firebase"
+import { AppRoute } from "../../../util/routes"
+import { AuthModal } from "./modal"
+import StreamModal from "./modal/StreamModal"
+import Sidebar from "./Sidebar"
 
 const Navbar: FC = () => {
     const user = useContext(UserContext);
     const { isOpen: drawerIsOpen, onToggle: toggleDrawer } = useDisclosure();
     const [modalState, setModalState] = useState({ index: 0, isOpen: false });
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [size, setSize] = React.useState("xl");
     const navigate = useNavigate();
 
     return (
@@ -90,52 +62,7 @@ const Navbar: FC = () => {
                             >
                                 Stream
                             </Button>
-                            <Modal
-                                size={size}
-                                isOpen={isOpen}
-                                onClose={onClose}
-                            >
-                                <ModalOverlay />
-                                <ModalContent>
-                                    <Center>
-                                        <ModalHeader>Title</ModalHeader>
-                                    </Center>
-                                    <ModalCloseButton />
-                                    <ModalBody>
-                                        <Image
-                                            draggable={false}
-                                            src={
-                                                "https://filestore.community.support.microsoft.com/api/images/857d91c4-3174-47e1-ac65-fb319ae97773?upload=true"
-                                            }
-                                            w="100%"
-                                            h="300"
-                                            alt="Video Thumbnail here"
-                                        />
-                                        <Box mt="5"></Box>
-                                        <FormControl
-                                            display="flex"
-                                            alignItems="center"
-                                        >
-                                            <FormLabel
-                                                htmlFor="email-alerts"
-                                                mb="0"
-                                            >
-                                                <FiVideo />
-                                            </FormLabel>
-                                            <Switch id="email-alerts" />
-                                        </FormControl>
-                                    </ModalBody>
-                                    <ModalFooter>
-                                        <Button
-                                            colorScheme="teal"
-                                            mr={3}
-                                            onClick={console.log}
-                                        >
-                                            Start Streaming
-                                        </Button>
-                                    </ModalFooter>
-                                </ModalContent>
-                            </Modal>
+                            <StreamModal isOpen={isOpen} onClose={onClose} />
                             <Menu>
                                 <MenuButton
                                     as={Button}
@@ -144,10 +71,7 @@ const Navbar: FC = () => {
                                     cursor={"pointer"}
                                     minW={0}
                                 >
-                                    <Avatar
-                                        size={"sm"}
-                                        src={user.photo}
-                                    />
+                                    <Avatar size={"sm"} src={user.photo} />
                                 </MenuButton>
                                 <MenuList>
                                     <MenuItem

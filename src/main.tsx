@@ -1,15 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import ReactDOM from "react-dom/client"
+import { BrowserRouter } from "react-router-dom"
 
-import {
-    ChakraProvider,
-    extendTheme,
-    theme as chakraTheme,
-    ThemeConfig,
-} from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, theme as chakraTheme, ThemeConfig } from "@chakra-ui/react"
 
-import App from "./App";
+import App from "./App"
 
 const fonts = {
     ...chakraTheme.fonts,
