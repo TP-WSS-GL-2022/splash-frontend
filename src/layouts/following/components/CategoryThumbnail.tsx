@@ -4,6 +4,7 @@ import {
     AspectRatio,
     Box,
     Image,
+    Heading,
 } from "@chakra-ui/react";
 
 import categoryStream from "./category_placeholder.jpg";
@@ -27,7 +28,7 @@ const CategoryThumbnail: FC = () => {
                 bgColor: "gray.700",
             }}
         >
-            <AspectRatio ratio= {2 / 3}>
+            <AspectRatio ratio={2 / 3}>
                 <Image
                     draggable={false}
                     src={categoryStream}
@@ -35,7 +36,13 @@ const CategoryThumbnail: FC = () => {
                     alt="Video Thumbnail here"
                     roundedTop="lg"
                 />
+
             </AspectRatio>
+            <Box p="4">
+                <Heading size="sm" noOfLines={1} color={"white"}>
+                    APEX GRIND TO MASTER??!! 24/50 TWITCH AFFLIATE GOAL
+                </Heading>
+            </Box>
         </Box>
     );
 };
