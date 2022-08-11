@@ -6,11 +6,11 @@ const Profile: FC = () => {
     return (
         <Center>
             <SimpleGrid w={"50%"} flexWrap="wrap" >
-                <UserProfileCard></UserProfileCard>
+                <UserProfileCard/>
                 <Heading>
                     Past Broadcast
                 </Heading>
-                <SimpleGrid minChildWidth="80" spacing="8">
+                <SimpleGrid minChildWidth="72" spacing="4">
                     <StreamThumbnail />
                     <StreamThumbnail />
                     <StreamThumbnail />
