@@ -12,7 +12,6 @@ import {
     Profile,
     Settings,
     Streaming,
-    Test,
 } from "./layouts";
 import { AppRoute } from "./util/routes";
 import "./util/util.css";
@@ -24,10 +23,12 @@ const App: FC = () => {
                 <Route path={AppRoute.Landing} element={<Landing />} />
                 <Route path={AppRoute.Home} element={<MainLayout />}>
                     <Route index element={<Home />} />
-                    <Route path={AppRoute.Test} element={<Test />} />
                     <Route path={AppRoute.Explore} element={<Explore />} />
                     <Route path={AppRoute.Following} element={<Following />} />
-                    <Route path={`${AppRoute.Live}/:username`} element={<Streaming />} />
+                    <Route
+                        path={`${AppRoute.Live}/:username`}
+                        element={<Streaming />}
+                    />
                 </Route>
                 <Route path={AppRoute.Profile} element={<MainLayout />}>
                     <Route index element={<Profile />} />
