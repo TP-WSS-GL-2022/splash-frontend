@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@asurraa/react-ts-flv-player": "^1.0.14",
+    "@chakra-ui/icons": "^2.0.6",
     "@chakra-ui/react": "^2.2.4",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
@@ -18,12 +19,13 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-firebase-hooks": "^5.0.3",
+    "react-flexview": "^6.0.1",
     "react-icons": "^4.4.0",
     "react-particles": "^2.1.4",
     "react-router-dom": "^6.3.0",
+    "react-stacked-center-carousel": "^1.0.12",
     "react-tsparticles": "^2.1.4",
     "tsparticles": "^2.1.4",
-    "react-stacked-center-carousel": "^1.0.12",
     "uuid": "^8.3.2",
     "yup": "^0.32.11"
   },
