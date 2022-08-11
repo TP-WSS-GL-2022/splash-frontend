@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import { FC, useRef } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
-import { ref } from "yup";
 import StreamThumbnail from "../following/components/StreamThumbnail";
 import CategoryThumbnail from "../following/components/CategoryThumbnail";
 import { HeroCarousel } from "./widgets";
