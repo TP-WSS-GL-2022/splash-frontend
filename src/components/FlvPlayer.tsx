@@ -41,7 +41,7 @@ const FlvPlayer = ({
     }, [isStreaming]);
 
     useEffect(() => {
-        if (!userId || !secret || isStreaming) return;
+        if (!userId || isStreaming) return;
 
         fetch(
             `http://18.143.74.14:6969/api/${userId}/live.flv`,
