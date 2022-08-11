@@ -18,34 +18,34 @@ import {
     AvatarBadge,
 } from "@chakra-ui/react";
 
-
-import { ViewIcon, ViewOffIcon, SmallCloseIcon } from '@chakra-ui/icons';
-import { FC, useState } from "react";
+import { ViewIcon, ViewOffIcon, SmallCloseIcon } from "@chakra-ui/icons";
+import { FC, useContext, useState } from "react";
+import { UserContext } from "../../context/UserContext";
 
 const Settings: FC = () => {
+    const user = useContext(UserContext)!;
     const [showPassword, setShowPassword] = useState(false);
-    const [value, setValue] = useState()
+    const [value, setValue] = useState();
 
     return (
         <Container maxW="container.xl">
             <Box mt="5">
                 <Heading>Account</Heading>
-                <Text fontSize={{ md: '1xl', lg: '2xl' }} color={'white'} >
-                    Live streaming video platform
-                </Text>{' '}
-                <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
+                <Text
+                    mt="2"
+                    fontSize={{ base: "md", lg: "lg" }}
+                    color={"gray.500"}
+                >
                     Customize and update your account details
                 </Text>
             </Box>
 
             {/* 1st column */}
-            <Stack direction={{ base: 'column', md: 'row' }}>
-                <Flex p={10} flex={1} align={'center'} justify={'center'}>
-                    <Stack w={'full'} maxW={'lg'}>
+            <Stack direction={{ base: "column", md: "row" }}>
+                <Flex p={10} flex={1} align={"center"} justify={"center"}>
+                    <Stack w={"full"} maxW={"lg"}>
                         <Center>
-                            <Avatar size="xl"
-                                src="https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                            >
+                            <Avatar size="2xl" src={user.photo}>
                                 <AvatarBadge
                                     as={IconButton}
                                     size="sm"
@@ -61,7 +61,6 @@ const Settings: FC = () => {
                             <input type="file" accept="image/*" />
                         </Center>
                     </Stack>
-
                 </Flex>
 
                 {/* 2nd column */}
@@ -69,29 +68,37 @@ const Settings: FC = () => {
                     <Stack spacing={5}>
                         <HStack>
                             <Box>
-                                <FormControl id="username" >
+                                <FormControl id="username">
                                     <FormLabel>Username</FormLabel>
                                     <Input type="text" />
                                 </FormControl>
                             </Box>
                         </HStack>
-                        <FormControl id="email" >
+                        <FormControl id="email">
                             <FormLabel>Email Address</FormLabel>
                             <Input type="email" />
                         </FormControl>
 
-
                         <FormControl id="password">
                             <FormLabel>Password</FormLabel>
                             <InputGroup>
-                                <Input type={showPassword ? 'text' : 'password'} />
-                                <InputRightElement h={'full'}>
+                                <Input
+                                    type={showPassword ? "text" : "password"}
+                                />
+                                <InputRightElement h={"full"}>
                                     <Button
-                                        variant={'ghost'}
+                                        variant={"ghost"}
                                         onClick={() =>
-                                            setShowPassword((showPassword) => !showPassword)
-                                        }>
-                                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                                            setShowPassword(
+                                                showPassword => !showPassword
+                                            )
+                                        }
+                                    >
+                                        {showPassword ? (
+                                            <ViewIcon />
+                                        ) : (
+                                            <ViewOffIcon />
+                                        )}
                                     </Button>
                                 </InputRightElement>
                             </InputGroup>
@@ -100,21 +107,18 @@ const Settings: FC = () => {
                             <Button
                                 loadingText="Submitting"
                                 size="lg"
-                                bg={'blue.400'}
-                                color={'white'}
+                                bg={"blue.400"}
+                                color={"white"}
                                 _hover={{
-                                    bg: 'blue.500',
-                                }}>
+                                    bg: "blue.500",
+                                }}
+                            >
                                 Update
                             </Button>
                         </Stack>
                     </Stack>
-
-
                 </Flex>
             </Stack>
-
-
         </Container>
     );
 };
