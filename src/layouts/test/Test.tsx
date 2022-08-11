@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useState } from "react";
 
-import { Box, HStack, Input } from "@chakra-ui/react"
+import { Box, HStack, Input } from "@chakra-ui/react";
 
-import FlvPlayer from "../../components/FlvPlayer"
-import ChatSidebar from "./components/ChatSidebar"
+import FlvPlayer from "../../components/FlvPlayer";
+import { ChatSidebar } from "./components";
 
 const Test = () => {
     const [userId, setUserId] = useState("");
