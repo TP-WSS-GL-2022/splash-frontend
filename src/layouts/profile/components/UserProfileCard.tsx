@@ -9,6 +9,7 @@ const UserProfileCard = () => {
             height={80}
             position={'relative'}
             mt={2}
+            boxShadow={'2xl'}
         >
             <Button position={'absolute'}
                 top={5}
