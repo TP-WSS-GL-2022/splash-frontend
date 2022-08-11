@@ -8,35 +8,27 @@ import {
     Button,
     Text,
 } from "@chakra-ui/react";
-import { auth } from "../../../util/firebase";
-import { UserContext } from "../../../models/User";
+import { UserContext } from "../../../context/UserContext";
 
 const UserProfileCard = () => {
-    const user = useContext(UserContext);
-
-    // useEffect(() => {
-    //     console.dir(user);
-    // }, [user]);
-
-    if (!user) return <></>;
+    const user = useContext(UserContext)!;
 
     return (
         <Box
             w="full"
             bgColor="blackAlpha.300"
-            height={80}
             position={"relative"}
-            mt={6}
-            p={6}
+            mt="8"
+            p="12"
         >
-            <Button position={"absolute"} top={5} right={5} colorScheme="teal">
+            <Button position={"absolute"} top="5" right="5" colorScheme="teal">
                 Follow
             </Button>
             <Center>
                 <Avatar size="2xl" name={user.username} src={user.photo} />
             </Center>
-            <VStack align={"center"}>
-                <Heading mt={4} size="2xl" noOfLines={1} maxW="50%">
+            <VStack align={"center"} spacing="4">
+                <Heading mt="4" size="2xl" noOfLines={1} maxW="50%">
                     {user.username}
                 </Heading>
                 <Text
@@ -48,7 +40,10 @@ const UserProfileCard = () => {
                     {user.bio}
                 </Text>
 
-                <Text>{user.followerCount}</Text>
+                <Text>
+                    {user.followerCount} follower
+                    {user.followerCount !== 1 && "s"}
+                </Text>
             </VStack>
         </Box>
     );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FC, useState } from "react";
 import { FiMenu, FiVideo } from "react-icons/fi";
 
@@ -31,7 +31,7 @@ import {
     Center,
     FormControl,
     FormLabel,
-    Switch
+    Switch,
 } from "@chakra-ui/react";
 
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -40,15 +40,16 @@ import Sidebar from "./Sidebar";
 import { auth } from "../../../util/firebase";
 import { signOut } from "firebase/auth";
 import { AppRoute } from "../../../util/routes";
+import { UserContext } from "../../../context/UserContext";
 
 const Navbar: FC = () => {
+    const user = useContext(UserContext);
     const { isOpen: drawerIsOpen, onToggle: toggleDrawer } = useDisclosure();
     const [modalState, setModalState] = useState({ index: 0, isOpen: false });
-    const [user, loading, error] = useAuthState(auth);
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const [size, setSize] = React.useState('xl')
-    const finalRef = React.useRef(null)
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [size, setSize] = React.useState("xl");
     const navigate = useNavigate();
+
     return (
         <>
             <Flex
@@ -77,9 +78,7 @@ const Navbar: FC = () => {
                 />
 
                 <HStack spacing={6}>
-                    {loading ? (
-                        <Skeleton w="28" h={4} />
-                    ) : user ? (
+                    {user ? (
                         <>
                             <Button
                                 variant={"solid"}
@@ -91,7 +90,11 @@ const Navbar: FC = () => {
                             >
                                 Stream
                             </Button>
-                            <Modal finalFocusRef={finalRef} size={size} isOpen={isOpen} onClose={onClose}>
+                            <Modal
+                                size={size}
+                                isOpen={isOpen}
+                                onClose={onClose}
+                            >
                                 <ModalOverlay />
                                 <ModalContent>
                                     <Center>
@@ -101,21 +104,33 @@ const Navbar: FC = () => {
                                     <ModalBody>
                                         <Image
                                             draggable={false}
-                                            src={"https://filestore.community.support.microsoft.com/api/images/857d91c4-3174-47e1-ac65-fb319ae97773?upload=true"}
+                                            src={
+                                                "https://filestore.community.support.microsoft.com/api/images/857d91c4-3174-47e1-ac65-fb319ae97773?upload=true"
+                                            }
                                             w="100%"
                                             h="300"
                                             alt="Video Thumbnail here"
                                         />
                                         <Box mt="5"></Box>
-                                        <FormControl display='flex' alignItems='center'>
-                                            <FormLabel htmlFor='email-alerts' mb='0'>
-                                            <FiVideo />
+                                        <FormControl
+                                            display="flex"
+                                            alignItems="center"
+                                        >
+                                            <FormLabel
+                                                htmlFor="email-alerts"
+                                                mb="0"
+                                            >
+                                                <FiVideo />
                                             </FormLabel>
-                                            <Switch id='email-alerts' />
+                                            <Switch id="email-alerts" />
                                         </FormControl>
                                     </ModalBody>
                                     <ModalFooter>
-                                        <Button colorScheme='teal' mr={3} onClick={console.log}>
+                                        <Button
+                                            colorScheme="teal"
+                                            mr={3}
+                                            onClick={console.log}
+                                        >
                                             Start Streaming
                                         </Button>
                                     </ModalFooter>
@@ -131,14 +146,24 @@ const Navbar: FC = () => {
                                 >
                                     <Avatar
                                         size={"sm"}
-                                        src={
-                                            "https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                        }
+                                        src={user.photo}
                                     />
                                 </MenuButton>
                                 <MenuList>
-                                    <MenuItem onClick={() => navigate(AppRoute.Profile)}>Profile</MenuItem>
-                                    <MenuItem onClick={() => navigate(AppRoute.Settings)}>Settings</MenuItem>
+                                    <MenuItem
+                                        onClick={() =>
+                                            navigate(AppRoute.Profile)
+                                        }
+                                    >
+                                        Profile
+                                    </MenuItem>
+                                    <MenuItem
+                                        onClick={() =>
+                                            navigate(AppRoute.Settings)
+                                        }
+                                    >
+                                        Settings
+                                    </MenuItem>
                                     <MenuDivider />
                                     <MenuItem onClick={() => signOut(auth)}>
                                         Sign out

@@ -24,4 +24,3 @@ export interface User {
 }
 
 export const Users = collection(fs, "users") as CollectionReference<User>;
-export const UserContext = createContext<User | null>(null);
