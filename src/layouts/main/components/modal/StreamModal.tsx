@@ -1,5 +1,5 @@
 import { doc, query, Timestamp, updateDoc, where } from "firebase/firestore"
-import { createRef, FocusEvent, useContext, useState } from "react"
+import { FocusEvent, useContext, useRef, useState } from "react"
 import { useCollection, useDocumentData } from "react-firebase-hooks/firestore"
 
 import {
@@ -19,7 +19,7 @@ const StreamModal = ({
     isOpen: boolean;
     onClose: () => void;
 }) => {
-    const inputRef = createRef<HTMLInputElement>();
+    const inputRef = useRef<HTMLInputElement>(null);
     const user = useContext(UserContext);
 
     const key = useDocumentData(doc(Keys, user?.ref.id ?? "-"))[0];

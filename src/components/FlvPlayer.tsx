@@ -1,7 +1,7 @@
-import FlvJs from "flv.js";
-import { createRef, useEffect, useState } from "react";
+import FlvJs from "flv.js"
+import { useEffect, useRef, useState } from "react"
 
-import { chakra, Image, usePrevious } from "@chakra-ui/react";
+import { chakra, Image, usePrevious } from "@chakra-ui/react"
 
 const FlvPlayer = ({
     userId,
@@ -16,7 +16,7 @@ const FlvPlayer = ({
     height?: string | number;
     onIsStreamingChange?: (streaming: boolean) => void;
 }) => {
-    const videoRef = createRef<HTMLVideoElement>();
+    const videoRef = useRef<HTMLVideoElement>(null);
 
     const [timer, setTimer] = useState(0);
     const [isStreaming, setIsStreaming] = useState(false);
