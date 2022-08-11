@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { Route, Routes } from "react-router-dom";
-import { UserProvider } from "./context/UserContext";
+import { FC } from "react"
+import { Route, Routes } from "react-router-dom"
+import { UserProvider } from "./context/UserContext"
 
 import {
     Error,
@@ -11,10 +11,10 @@ import {
     MainLayout,
     Profile,
     Settings,
-    Streaming,
-} from "./layouts";
-import { AppRoute } from "./util/routes";
-import "./util/util.css";
+    Streaming
+} from "./layouts"
+import { AppRoute } from "./util/routes"
+import "./util/util.css"
 
 const App: FC = () => {
     return (
@@ -26,7 +26,7 @@ const App: FC = () => {
                     <Route path={AppRoute.Explore} element={<Explore />} />
                     <Route path={AppRoute.Following} element={<Following />} />
                     <Route
-                        path={`${AppRoute.Live}/:username`}
+                        path={`${AppRoute.Live}/:userId`}
                         element={<Streaming />}
                     />
                 </Route>

@@ -56,7 +56,14 @@ const FlvPlayer = ({
     }, [timer, isStreaming, userId, secret]);
 
     useEffect(() => {
-        if (!FlvJs.isSupported() || !videoRef.current) return;
+        if (!FlvJs.isSupported()) {
+            return console.warn("FlvJs is not supported");
+        }
+
+        if (!videoRef.current) {
+            return console.warn("Could not find video ref element")
+        }
+
         console.log("FlvJs is loading:", { userId, secret });
 
         const player = FlvJs.createPlayer(
@@ -100,7 +107,7 @@ const FlvPlayer = ({
                 player.destroy();
             } catch {}
         };
-    }, [userId, secret, videoRef.current]);
+    }, [userId, secret, videoRef.current, isStreaming]);
 
     return isStreaming ? (
         <chakra.video
