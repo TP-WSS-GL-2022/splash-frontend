@@ -34,7 +34,7 @@ const StreamThumbnail: FC = () => {
                 borderColor: "gray.600",
                 bgColor: "gray.700",
             }}
-            onClick={() => navigate(`${AppRoute.Live}/johndoe`)}
+            onClick={() => navigate(`${AppRoute.Live}/ucTmpIn0wr8KuUBaL1V8`)}
         >
             <LiveIndicator />
             <AspectRatio ratio={16 / 10}>

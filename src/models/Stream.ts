@@ -1,10 +1,10 @@
 import {
     collection,
     CollectionReference,
-    DocumentReference
-} from "firebase/firestore"
-import { fs } from "../util/firebase"
-import { User } from "./User"
+    DocumentReference,
+} from "firebase/firestore";
+import { fs } from "../util/firebase";
+import { User } from "./User";
 
 export interface Stream {
     title: string;
@@ -12,7 +12,7 @@ export interface Stream {
     startedAt?: Date;
     endedAt?: Date;
     nmsId: string;
-    streamerId: DocumentReference<User>;
+    streamerRef: DocumentReference<User>;
 }
 
 export const Streams = collection(fs, "streams") as CollectionReference<Stream>;

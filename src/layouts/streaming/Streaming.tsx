@@ -1,18 +1,43 @@
-import { FC } from "react"
-import { FiPlay } from "react-icons/fi"
-import { useParams } from "react-router-dom"
+import { FC } from "react";
+import { FiPlay } from "react-icons/fi";
+import { useParams } from "react-router-dom";
 
 import {
-    Avatar, Box, Center, Flex, Heading, HStack, IconButton, useBoolean, VStack
-} from "@chakra-ui/react"
+    Avatar,
+    Box,
+    Center,
+    Flex,
+    Heading,
+    HStack,
+    IconButton,
+    useBoolean,
+    VStack,
+} from "@chakra-ui/react";
 
-import FlvPlayer from "../../components/FlvPlayer"
-import ChatSidebar from "./components/ChatSidebar"
+import FlvPlayer from "../../components/FlvPlayer";
+import ChatSidebar from "./components/ChatSidebar";
+import { doc, query, where } from "firebase/firestore";
+import {
+    useCollectionData,
+    useDocumentData,
+} from "react-firebase-hooks/firestore";
+import { Streams, Users } from "../../models";
 
 const Streaming: FC<{}> = () => {
     const userId = useParams().userId!;
 
     const [clicked, setClicked] = useBoolean();
+    const [user] = useDocumentData(doc(Users, userId));
+    const [, isLoadingStream, error, streamQuery] = useCollectionData(
+        query(
+            Streams,
+            where("streamer", "==", doc(Users, userId)),
+            where("endedAt", "==", null),
+            where("startedAt", "!=", null)
+        )
+    );
+
+    const streamSnap = streamQuery!.docs[0]!;
 
     return (
         <>
@@ -25,57 +50,30 @@ const Streaming: FC<{}> = () => {
                             userId={userId}
                         />
                     ) : (
-                        <Center
-                            width="800px"
-                            height="450px"
-                            onClick={setClicked.on}
-                        >
+                        <Center width="800px" height="450px">
                             <IconButton
                                 aria-label="Play"
-                                icon={<FiPlay />}
-                            ></IconButton>
+                                onClick={setClicked.on}
+                            >
+                                <FiPlay />
+                            </IconButton>
                         </Center>
                     )}
-                    <StreamFooter />
+                    <Box p="6" borderTopWidth="thin" borderTopColor="gray.600">
+                        <VStack align="start">
+                            <Heading size="md">
+                                apox streaming 49/50 twitch affliate! !lurk
+                            </Heading>
+                        </VStack>
+                        <HStack mt="6" spacing="4">
+                            <Avatar />
+                            <Heading size="md">johndoe</Heading>
+                        </HStack>
+                    </Box>
                 </Flex>
-                <ChatSidebar />
+                <ChatSidebar streamRef={streamSnap.ref} />
             </Flex>
         </>
-    );
-};
-
-const StreamFooter: FC<{}> = () => {
-    return (
-        <Box p="6" borderTopWidth="thin" borderTopColor="gray.600">
-            <VStack align="start">
-                <Heading size="md">
-                    apox streaming 49/50 twitch affliate! !lurk
-                </Heading>
-            </VStack>
-            <HStack mt="6" spacing="4">
-                <Avatar />
-                <Heading size="md">johndoe</Heading>
-            </HStack>
-
-            {/* <Heading size="md">
-                apox streaming 49/50 twitch affliate! !lurk
-            </Heading>
-            <Heading size="md">
-                apox streaming 49/50 twitch affliate! !lurk
-            </Heading>
-            <Heading size="md">
-                apox streaming 49/50 twitch affliate! !lurk
-            </Heading>
-            <Heading size="md">
-                apox streaming 49/50 twitch affliate! !lurk
-            </Heading>
-            <Heading size="md">
-                apox streaming 49/50 twitch affliate! !lurk
-            </Heading>
-            <Heading size="md">
-                apox streaming 49/50 twitch affliate! !lurk
-            </Heading> */}
-        </Box>
     );
 };
 

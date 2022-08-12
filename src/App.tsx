@@ -26,7 +26,7 @@ const App: FC = () => {
                     <Route path={AppRoute.Explore} element={<Explore />} />
                     <Route path={AppRoute.Following} element={<Following />} />
                     <Route
-                        path={`${AppRoute.Live}/:userId`}
+                        path={`${AppRoute.Live}/:streamUid`}
                         element={<Streaming />}
                     />
                 </Route>
