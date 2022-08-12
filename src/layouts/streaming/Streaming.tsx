@@ -1,13 +1,41 @@
-import { Avatar, Box, Flex, Heading, HStack, VStack } from "@chakra-ui/react";
-import { FC } from "react";
-import ChatSidebar from "./components/ChatSidebar";
+import { FC } from "react"
+import { FiPlay } from "react-icons/fi"
+import { useParams } from "react-router-dom"
+
+import {
+    Avatar, Box, Center, Flex, Heading, HStack, IconButton, useBoolean, VStack
+} from "@chakra-ui/react"
+
+import FlvPlayer from "../../components/FlvPlayer"
+import ChatSidebar from "./components/ChatSidebar"
 
 const Streaming: FC<{}> = () => {
+    const userId = useParams().userId!;
+
+    const [clicked, setClicked] = useBoolean();
+
     return (
         <>
             <Flex h="full">
                 <Flex flex="3" direction="column" overflowY="scroll">
-                    <Box minH="2xl"></Box>
+                    {clicked ? (
+                        <FlvPlayer
+                            width="800px"
+                            height="450px"
+                            userId={userId}
+                        />
+                    ) : (
+                        <Center
+                            width="800px"
+                            height="450px"
+                            onClick={setClicked.on}
+                        >
+                            <IconButton
+                                aria-label="Play"
+                                icon={<FiPlay />}
+                            ></IconButton>
+                        </Center>
+                    )}
                     <StreamFooter />
                 </Flex>
                 <ChatSidebar />

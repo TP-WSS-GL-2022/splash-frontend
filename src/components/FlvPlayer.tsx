@@ -41,10 +41,10 @@ const FlvPlayer = ({
     }, [isStreaming]);
 
     useEffect(() => {
-        if (!userId || !secret || isStreaming) return;
+        if (!userId || isStreaming) return;
 
         fetch(
-            `http://18.143.74.14:6969/api/${userId}/live.flv`,
+            `http://13.215.209.8:6969/api/${userId}/live.flv`,
             secret
                 ? {
                       headers: {
@@ -56,13 +56,20 @@ const FlvPlayer = ({
     }, [timer, isStreaming, userId, secret]);
 
     useEffect(() => {
-        if (!FlvJs.isSupported() || !videoRef.current) return;
+        if (!FlvJs.isSupported()) {
+            return console.warn("FlvJs is not supported");
+        }
+
+        if (!videoRef.current) {
+            return console.warn("Could not find video ref element")
+        }
+
         console.log("FlvJs is loading:", { userId, secret });
 
         const player = FlvJs.createPlayer(
             {
                 type: "flv",
-                url: `http://18.143.74.14:6969/api/${userId}/live.flv`,
+                url: `http://13.215.209.8:6969/api/${userId}/live.flv`,
                 isLive: true,
                 hasAudio: true,
                 hasVideo: true,
@@ -100,7 +107,7 @@ const FlvPlayer = ({
                 player.destroy();
             } catch {}
         };
-    }, [userId, videoRef]);
+    }, [userId, secret, videoRef.current, isStreaming]);
 
     return isStreaming ? (
         <chakra.video

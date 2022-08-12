@@ -1,16 +1,23 @@
-import { doc, query, Timestamp, updateDoc, where } from "firebase/firestore"
-import { FocusEvent, useContext, useRef, useState } from "react"
-import { useCollection, useDocumentData } from "react-firebase-hooks/firestore"
+import { doc, query, Timestamp, updateDoc, where } from "firebase/firestore";
+import { FocusEvent, useContext, useRef, useState } from "react";
+import { useCollection, useDocumentData } from "react-firebase-hooks/firestore";
 
 import {
-    Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader,
-    ModalOverlay
-} from "@chakra-ui/react"
+    Button,
+    Input,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+} from "@chakra-ui/react";
 
-import FlvPlayer from "../../../../components/FlvPlayer"
-import { UserContext } from "../../../../context/UserContext"
-import { Keys } from "../../../../models/Key"
-import { Streams } from "../../../../models/Stream"
+import FlvPlayer from "../../../../components/FlvPlayer";
+import { UserContext } from "../../../../context/UserContext";
+import { Keys } from "../../../../models/Key";
+import { Streams } from "../../../../models/Stream";
 
 const StreamModal = ({
     isOpen,
