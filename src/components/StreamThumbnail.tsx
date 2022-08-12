@@ -1,11 +1,19 @@
-import { FC } from "react"
-import { useNavigate } from "react-router-dom"
+import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
-    AspectRatio, Avatar, Badge, Box, Heading, HStack, Image, Text, VStack
-} from "@chakra-ui/react"
+    AspectRatio,
+    Avatar,
+    Badge,
+    Box,
+    Heading,
+    HStack,
+    Image,
+    Text,
+    VStack,
+} from "@chakra-ui/react";
 
-import { AppRoute } from "../util/routes"
+import { AppRoute } from "../util/routes";
 
 const StreamThumbnail: FC = () => {
     const navigate = useNavigate();
@@ -27,7 +35,7 @@ const StreamThumbnail: FC = () => {
                 borderColor: "gray.600",
                 bgColor: "gray.700",
             }}
-            onClick={() => navigate(`${AppRoute.Live}/johndoe`)}
+            onClick={() => navigate(`${AppRoute.Live}/ucTmpIn0wr8KuUBaL1V8`)}
         >
             <LiveIndicator />
             <AspectRatio ratio={16 / 10}>

@@ -1,12 +1,12 @@
 import { FC, PropsWithChildren } from "react"
 
+import { Button, Flex, Highlight, Input, Text, VStack } from "@chakra-ui/react";
+import { Message, Messages, Stream } from "../../../models";
 import {
-    Button,
-    Flex,
-    Highlight,
-    Input, Text,
-    VStack
-} from "@chakra-ui/react"
+    useCollection,
+    useCollectionData,
+} from "react-firebase-hooks/firestore";
+import { DocumentReference, query, where } from "firebase/firestore";
 
 export interface ChatMessageProps {
     // author: User ??
@@ -31,7 +31,17 @@ export const ChatMessage: FC<PropsWithChildren<ChatMessageProps>> = props => {
 
 const messages = Array(40).fill(null);
 
-const ChatSidebar: FC<{}> = () => {
+export interface ChatSidebarProps {
+    streamRef: DocumentReference<Stream>;
+}
+
+const ChatSidebar: FC<ChatSidebarProps> = ({ streamRef }) => {
+    const [messages, isLoadingMessages, hasErrorMessages] = useCollectionData(
+        query(Messages, where("streamId", "==", streamRef))
+    );
+
+    if (!messages || isLoadingMessages) return <></>;
+
     return (
         <Flex
             w="80"
