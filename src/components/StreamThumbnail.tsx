@@ -20,7 +20,6 @@ const StreamThumbnail: FC = () => {
 
     return (
         <Box
-            // use tab key and remove if needed
             tabIndex={0}
             w="72"
             minW="72"
