@@ -44,7 +44,7 @@ const FlvPlayer = ({
         if (!userId || isStreaming) return;
 
         fetch(
-            `http://13.215.209.8:6969/api/${userId}/live.flv`,
+            `http://wssgl.loca.lt/api/${userId}/live.flv`,
             secret
                 ? {
                       headers: {
@@ -69,7 +69,7 @@ const FlvPlayer = ({
         const player = FlvJs.createPlayer(
             {
                 type: "flv",
-                url: `http://13.215.209.8:6969/api/${userId}/live.flv`,
+                url: `http://wssgl.loca.lt/api/${userId}/live.flv`,
                 isLive: true,
                 hasAudio: true,
                 hasVideo: true,

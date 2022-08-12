@@ -1,43 +1,30 @@
-import { FC } from "react";
-import { FiPlay } from "react-icons/fi";
-import { useParams } from "react-router-dom";
+import { doc, query, where } from "firebase/firestore"
+import { FC } from "react"
+import { useCollection, useDocumentData } from "react-firebase-hooks/firestore"
+import { FiPlay } from "react-icons/fi"
+import { useParams } from "react-router-dom"
 
 import {
-    Avatar,
-    Box,
-    Center,
-    Flex,
-    Heading,
-    HStack,
-    IconButton,
-    useBoolean,
-    VStack,
-} from "@chakra-ui/react";
+    Avatar, Box, Center, Flex, Heading, HStack, IconButton, useBoolean, VStack
+} from "@chakra-ui/react"
 
-import FlvPlayer from "../../components/FlvPlayer";
-import ChatSidebar from "./components/ChatSidebar";
-import { doc, query, where } from "firebase/firestore";
-import {
-    useCollectionData,
-    useDocumentData,
-} from "react-firebase-hooks/firestore";
-import { Streams, Users } from "../../models";
+import FlvPlayer from "../../components/FlvPlayer"
+import { Streams, Users } from "../../models"
+import ChatSidebar from "./components/ChatSidebar"
 
 const Streaming: FC<{}> = () => {
     const userId = useParams().userId!;
 
     const [clicked, setClicked] = useBoolean();
-    const [user] = useDocumentData(doc(Users, userId));
-    const [, isLoadingStream, error, streamQuery] = useCollectionData(
+    const [user] = useDocumentData(doc(Users, userId ?? "-"));
+    const streamSnap = useCollection(
         query(
             Streams,
-            where("streamer", "==", doc(Users, userId)),
+            where("streamer", "==", doc(Users, userId ?? "-")),
             where("endedAt", "==", null),
             where("startedAt", "!=", null)
         )
-    );
-
-    const streamSnap = streamQuery!.docs[0]!;
+    )[0]?.docs[0];
 
     return (
         <>
@@ -47,7 +34,7 @@ const Streaming: FC<{}> = () => {
                         <FlvPlayer
                             width="800px"
                             height="450px"
-                            userId={userId}
+                            userId={userId ?? "-"}
                         />
                     ) : (
                         <Center width="800px" height="450px">
@@ -71,7 +58,7 @@ const Streaming: FC<{}> = () => {
                         </HStack>
                     </Box>
                 </Flex>
-                <ChatSidebar streamRef={streamSnap.ref} />
+                <ChatSidebar streamRef={streamSnap?.ref} />
             </Flex>
         </>
     );

@@ -1,12 +1,10 @@
-import { FC, PropsWithChildren } from "react";
+import { DocumentReference, query, where } from "firebase/firestore"
+import { FC, PropsWithChildren } from "react"
+import { useCollectionData, useDocumentDataOnce } from "react-firebase-hooks/firestore"
 
-import { Button, Flex, Highlight, Input, Text, VStack } from "@chakra-ui/react";
-import { Message, Messages, Stream, User } from "../../../models";
-import {
-    useCollectionData,
-    useDocumentDataOnce,
-} from "react-firebase-hooks/firestore";
-import { DocumentReference, query, where } from "firebase/firestore";
+import { Button, Flex, Highlight, Input, Text, VStack } from "@chakra-ui/react"
+
+import { Messages, Stream, User } from "../../../models"
 
 export interface ChatMessageProps {
     authorRef: DocumentReference<User>;
@@ -33,14 +31,14 @@ export const ChatMessage: FC<PropsWithChildren<ChatMessageProps>> = props => {
 };
 
 export interface ChatSidebarProps {
-    streamRef: DocumentReference<Stream>;
+    streamRef?: DocumentReference<Stream>;
 }
 
 const ChatSidebar: FC<ChatSidebarProps> = ({ streamRef }) => {
     const [messages, isLoadingMessages, hasErrorMessages] = useCollectionData(
         query(
             Messages,
-            where("streamId", "==", streamRef),
+            where("streamId", "==", streamRef ?? null),
             where("createdAt", ">=", new Date())
         )
     );
