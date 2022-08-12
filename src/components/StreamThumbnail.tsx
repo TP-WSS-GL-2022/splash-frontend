@@ -1,18 +1,25 @@
-import { FC } from "react"
-import { useNavigate } from "react-router-dom"
+import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
-    AspectRatio, Avatar, Badge, Box, Heading, HStack, Image, Text, VStack
-} from "@chakra-ui/react"
+    AspectRatio,
+    Avatar,
+    Badge,
+    Box,
+    Heading,
+    HStack,
+    Image,
+    Text,
+    VStack,
+} from "@chakra-ui/react";
 
-import { AppRoute } from "../util/routes"
+import { AppRoute } from "../util/routes";
 
 const StreamThumbnail: FC = () => {
     const navigate = useNavigate();
 
     return (
         <Box
-            // use tab key and remove if needed
             tabIndex={0}
             w="72"
             minW="72"

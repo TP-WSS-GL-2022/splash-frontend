@@ -1,8 +1,21 @@
 import { Box, chakra, HStack, IconButton, Text } from "@chakra-ui/react";
+import { query, where } from "firebase/firestore";
+import _ from "lodash";
+import { useCollection } from "react-firebase-hooks/firestore";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import StreamThumbnail from "../../../components/StreamThumbnail";
+import { Streams } from "../../../models";
 
 const RecommendedVods = () => {
+    const vodsSnap = useCollection(
+        query(Streams, where("endedAt", "!=", null))
+    )[0]?.docs;
+
+    const docs = vodsSnap?.map(snap => snap.data());
+    console.log(docs);
+    const vods = docs
+        ? _.sampleSize(docs, docs!.length > 5 ? 5 : docs!.length)
+        : null;
     return (
         <Box>
             <Text fontSize={20}>
@@ -31,16 +44,9 @@ const RecommendedVods = () => {
                     overflowY="hidden"
                     className="invis-scrollbar"
                 >
-                    <StreamThumbnail />
-                    <StreamThumbnail />
-                    <StreamThumbnail />
-                    <StreamThumbnail />
-                    <StreamThumbnail />
-                    <StreamThumbnail />
-                    <StreamThumbnail />
-                    <StreamThumbnail />
-                    <StreamThumbnail />
-                    <StreamThumbnail />
+                    {vods?.map(stream => (
+                        <StreamThumbnail />
+                    ))}
                 </HStack>
                 <IconButton
                     aria-label="Next recommended category"
